@@ -9,6 +9,7 @@ nav:
     日志: /archives/ || fas fa-archive
     分类: /categories/ || fas fa-folder
     标签: /tags/ || fas fa-tags
+    相册: /gallery/ || fas fa-camera
     音乐: /music/ || fas fa-music
     关于: /about/ || fas fa-user
 
@@ -68,21 +69,18 @@ search:
   field: post
   content: true
 
-# 评论区 - Giscus
+# 评论区 - Twikoo
 comments:
   enable: true
-  use: giscus
-  giscus:
-    repo: your-username/your-repo
-    repo_id: your-repo-id
-    category: General
-    category_id: your-category-id
-    mapping: pathname
-    reactions_enabled: 1
-    emit_metadata: 0
-    input_position: bottom
-    theme: light
-    lang: zh-CN
+  use: twikoo
+  text: 评论
+  count: true
+  twikoo:
+    envId: twikoo-xxxx.vercel.app
+    region:
+    path: window.location.pathname
+    visitor: true
+    option:
 
 # 音乐播放器
 aplayer:
