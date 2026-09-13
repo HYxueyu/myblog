@@ -69,18 +69,14 @@ search:
   field: post
   content: true
 
-# 评论区 - Twikoo
+# 评论区 - 自定义评论系统
 comments:
-  enable: true
-  use: twikoo
-  text: 评论
-  count: true
-  twikoo:
-    envId: twikoo-xxxx.vercel.app
-    region:
-    path: window.location.pathname
-    visitor: true
-    option:
+  enable: false
+
+# 注入自定义评论
+inject:
+  bottom:
+    - <script src="/js/comment.js"></script>
 
 # 音乐播放器
 aplayer:
