@@ -16,11 +16,11 @@ type: about
 - 🎬 Vlog — 记录生活的有趣片段
 - 🎵 音乐 — 什么歌都听一点
 - 🔧 DIY — 自己动手做东西很有成就感
-- 🎮 游戏 — 塞尔达、原神都是我的爱
+- 🎮 游戏 — 塞尔达、博德之门3、最终幻想系列
 
 ## 联系我
 
-- 📧 邮箱：hello@example.com
+- 📧 邮箱：1163283950@qq.com
 - 💬 微信：your_wechat_id
 - 🐙 GitHub：[your-github](https://github.com/)
 
