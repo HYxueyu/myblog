@@ -37,9 +37,13 @@
   function init() {
     if (!isPostPage()) return;
 
-    var container = document.getElementById('post-comment') || document.querySelector('#article-container') || document.querySelector('.post-content');
+    var container = document.getElementById('post-comment');
     if (!container) {
-      var article = document.querySelector('#article-container') || document.querySelector('.article-container');
+      var article = document.querySelector('#article-container') ||
+                    document.querySelector('.post-content') ||
+                    document.querySelector('.article-content') ||
+                    document.querySelector('main') ||
+                    document.querySelector('.post');
       if (article) {
         container = document.createElement('div');
         container.id = 'post-comment';
@@ -47,11 +51,6 @@
       } else {
         return;
       }
-    } else if (container.id !== 'post-comment') {
-      var div = document.createElement('div');
-      div.id = 'post-comment';
-      container.appendChild(div);
-      container = div;
     } else {
       container.innerHTML = '';
     }
@@ -68,7 +67,10 @@
   function isPostPage() {
     return window.location.pathname.match(/\/\d{4}\/\d{2}\/.+/) ||
            document.querySelector('#article-container') ||
-           document.querySelector('.post-content');
+           document.querySelector('.post-content') ||
+           document.querySelector('.article-content') ||
+           document.querySelector('article.post') ||
+           document.querySelector('article');
   }
 
   function getPath() {
