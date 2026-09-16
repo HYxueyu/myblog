@@ -10,3 +10,6 @@ _multiconfig.yml
 blog-upload.zip
 twikoo/
 themes/flatpaper/.git/
+
+# IDE
+.idea/
