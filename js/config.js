@@ -8,5 +8,5 @@
    ============================================================ */
 
 const SITE_CONFIG = {
-  twikooEnvId: "",   // ← 把你的 Twikoo 后端地址填进引号里
+  twikooEnvId: "https://twikoo.heiyunas.top",   // Twikoo 评论后端（Cloudflare Worker）
 };
