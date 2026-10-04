@@ -720,9 +720,70 @@ a:hover { color: var(--accent); }
   backdrop-filter: blur(4px);
 }
 
-.badge-reading { background: rgba(224, 82, 76, 0.9); }   /* 在读/在玩：霓虹绿 */
+.badge-reading { background: rgba(224, 82, 76, 0.9); }   /* 在读/在玩：霓虹红 */
 .badge-done    { background: rgba(76, 201, 240, 0.9); }   /* 已完成：电光蓝 */
 .badge-wish    { background: rgba(143, 155, 176, 0.85); } /* 计划中：灰蓝 */
+
+/* 平台角标（游戏墙：Steam / PS5 / PS4 / Switch） */
+.shelf-platform {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  font-size: 11px;
+  letter-spacing: 0.5px;
+  padding: 2px 9px;
+  border-radius: 999px;
+  color: #fff;
+  background: rgba(18, 22, 30, 0.78);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  backdrop-filter: blur(4px);
+}
+html[data-theme="light"] .shelf-platform {
+  background: rgba(255, 255, 255, 0.85);
+  color: #333;
+  border-color: rgba(0, 0, 0, 0.12);
+}
+
+/* 游戏墙平台筛选条 */
+.platform-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin: 18px 0 6px;
+}
+.platform-pill {
+  font-size: 13px;
+  padding: 5px 15px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--ink-soft);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.platform-pill:hover { color: var(--ink); border-color: var(--accent); }
+.platform-pill.is-on {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: #fff;
+  font-weight: 600;
+}
+.platform-pill .pill-count { opacity: 0.7; font-size: 12px; margin-left: 4px; }
+
+/* 想玩/计划中条目多时折叠（游戏墙 17 条想玩） */
+.shelf-group-more {
+  display: block;
+  width: 100%;
+  margin: 14px 0 0;
+  padding: 10px;
+  font-size: 14px;
+  color: var(--ink-soft);
+  background: var(--surface);
+  border: 1px dashed var(--line);
+  border-radius: 12px;
+  cursor: pointer;
+}
+.shelf-group-more:hover { color: var(--accent); border-color: var(--accent); }
 
 /* 信息区 */
 .shelf-info { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; }

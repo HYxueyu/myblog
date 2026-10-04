@@ -176,10 +176,11 @@ function shelfCardHTML(item, defaultEmoji) {
   // 状态标签（想读/想看/想玩不显示进度）
   const st = SHELF_STATUS[item.status] || SHELF_STATUS.wish;
 
-  return '<article class="shelf-card">' +
+  return '<article class="shelf-card" data-platform="' + (item.platform || "") + '">' +
     '<div class="shelf-cover-wrap">' +
       posterHTML(item, defaultEmoji) +
       '<span class="shelf-badge ' + st.cls + '">' + st.label + "</span>" +
+      (item.platform ? '<span class="shelf-platform">' + item.platform + "</span>" : "") +
     "</div>" +
     '<div class="shelf-info">' +
       "<h3>" + item.title + "</h3>" +
@@ -196,9 +197,11 @@ function shelfCardHTML(item, defaultEmoji) {
 }
 
 // 把条目按状态分组渲染：进行中 / 已完成 / 计划中
-function renderShelf(container, items, defaultEmoji, labels) {
+// opts: { container, filterEl, collapseWish, collapseAt }
+function renderShelf(container, items, defaultEmoji, labels, opts) {
   if (!container) return;
   labels = labels || SHELF_LABELS.reading;
+  opts = opts || {};
   const groups = [
     { key: "reading", heading: labels.ing },
     { key: "watching", heading: labels.ing },
@@ -206,16 +209,78 @@ function renderShelf(container, items, defaultEmoji, labels) {
     { key: "done", heading: labels.done },
     { key: "wish", heading: labels.wish },
   ];
-  let html = "";
-  groups.forEach(function (g) {
-    const list = items.filter(function (it) { return it.status === g.key; });
-    if (list.length === 0) return;
-    html += '<h2 class="shelf-group-title">' + g.heading + "（" + list.length + "）</h2>";
-    html += '<div class="shelf-grid">' +
-      list.map(function (it) { return shelfCardHTML(it, defaultEmoji); }).join("") +
-      "</div>";
-  });
-  container.innerHTML = html || '<p class="empty-tip">这里还空着，第一条记录正在路上 📚</p>';
+
+  // 当前选中的平台（游戏墙用）
+  let activePlatform = opts.platform || "";
+  const filterEl = opts.filterEl;
+
+  function paint() {
+    const list = activePlatform
+      ? items.filter(function (it) { return (it.platform || "") === activePlatform; })
+      : items;
+    let html = "";
+    groups.forEach(function (g) {
+      const sub = list.filter(function (it) { return it.status === g.key; });
+      if (sub.length === 0) return;
+      const collapse = opts.collapseWish && g.key === "wish" && sub.length > (opts.collapseAt || 8);
+      const shown = collapse ? sub.slice(0, opts.collapseAt || 8) : sub;
+      html += '<h2 class="shelf-group-title">' + g.heading + "（" + sub.length + "）</h2>";
+      html += '<div class="shelf-grid" data-group="' + g.key + '">' +
+        shown.map(function (it) { return shelfCardHTML(it, defaultEmoji); }).join("") +
+        "</div>";
+      if (collapse) {
+        html += '<button class="shelf-group-more" data-group="' + g.key + '">展开剩余 ' +
+          (sub.length - shown.length) + " 条 ▾</button>";
+      }
+    });
+    container.innerHTML = html || '<p class="empty-tip">这里还空着，第一条记录正在路上 📚</p>';
+
+    // 「展开」按钮：把剩下的条目补进来
+    container.querySelectorAll(".shelf-group-more").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const gk = btn.getAttribute("data-group");
+        const sub = list.filter(function (it) { return it.status === gk; });
+        const grid = container.querySelector('.shelf-grid[data-group="' + gk + '"]');
+        if (grid) {
+          grid.innerHTML = sub.map(function (it) { return shelfCardHTML(it, defaultEmoji); }).join("");
+        }
+        btn.remove();
+      });
+    });
+  }
+
+  // 平台筛选条
+  if (filterEl) {
+    const counts = {};
+    items.forEach(function (it) {
+      const p = it.platform || "其他";
+      counts[p] = (counts[p] || 0) + 1;
+    });
+    const order = ["Steam", "PS5", "PS4", "Switch", "其他"];
+    const keys = Object.keys(counts).sort(function (a, b) {
+      const ia = order.indexOf(a), ib = order.indexOf(b);
+      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
+    });
+    filterEl.innerHTML =
+      '<button class="platform-pill is-on" data-p="">全部<span class="pill-count">' +
+        items.length + "</span></button>" +
+      keys.map(function (p) {
+        return '<button class="platform-pill" data-p="' + p + '">' + p +
+          '<span class="pill-count">' + counts[p] + "</span></button>";
+      }).join("");
+    filterEl.querySelectorAll(".platform-pill").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        filterEl.querySelectorAll(".platform-pill").forEach(function (b) {
+          b.classList.remove("is-on");
+        });
+        btn.classList.add("is-on");
+        activePlatform = btn.getAttribute("data-p");
+        paint();
+      });
+    });
+  }
+
+  paint();
 }
 
 /* ---------- 音乐播放器（底部悬浮播放条 + 音乐页歌单） ---------- */
@@ -378,7 +443,11 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---- 游戏墙页（数据在 js/library.js 的 GAMES 数组） ----
   const gameBox = document.getElementById("game-shelf");
   if (gameBox) {
-    renderShelf(gameBox, GAMES, "🎮", SHELF_LABELS.game);
+    renderShelf(gameBox, GAMES, "🎮", SHELF_LABELS.game, {
+      filterEl: document.getElementById("platform-filter"),
+      collapseWish: true,
+      collapseAt: 8,
+    });
     document.title = "游戏墙 · 小筑";
   }
 

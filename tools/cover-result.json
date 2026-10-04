@@ -1,0 +1,170 @@
+{
+  "葬送的芙莉莲": {
+    "cover": "posters/bgm-400602.jpg",
+    "match": "葬送的芙莉莲",
+    "score": 1,
+    "source": "bangumi"
+  },
+  "電鋸人（全彩版）": {
+    "cover": "posters/bgm-268279.jpg",
+    "match": "链锯人",
+    "score": 1,
+    "source": "bangumi",
+    "id": 268279,
+    "note": "链锯人"
+  },
+  "坂本日常": {
+    "cover": "posters/bgm-496617.jpg",
+    "match": "坂本日常",
+    "score": 1,
+    "source": "bangumi"
+  },
+  "灌篮高手（完全版）": {
+    "cover": "posters/bgm-18462.jpg",
+    "match": "灌篮高手 完全版",
+    "score": 1,
+    "source": "bangumi",
+    "id": 18462,
+    "note": "SLAM DUNK 完全版"
+  },
+  "迷宫饭": {
+    "cover": "posters/bgm-395378.jpg",
+    "match": "迷宫饭",
+    "score": 1,
+    "source": "bangumi"
+  },
+  "杀戮都市": {
+    "cover": "posters/bgm-35906.jpg",
+    "match": "杀戮都市",
+    "score": 1,
+    "source": "bangumi",
+    "id": 35906,
+    "note": "GANTZ"
+  },
+  "人间失格": {
+    "cover": "posters/bgm-39199.jpg",
+    "match": "人间失格",
+    "score": 1,
+    "source": "bangumi",
+    "id": 39199,
+    "note": "人间失格（伊藤润二 绘）"
+  },
+  "伊藤润二爱藏版": {
+    "cover": "posters/bgm-316522.jpg",
+    "match": "伊藤润二杰作集",
+    "score": 1,
+    "source": "bangumi",
+    "id": 316522,
+    "note": "伊藤润二杰作集"
+  },
+  "伊藤润二恐怖漫画精选": {
+    "cover": "posters/bgm-4317.jpg",
+    "match": "伊藤润二恐怖漫画精选",
+    "score": 1,
+    "source": "bangumi",
+    "id": 4317,
+    "note": "伊藤润二恐怖漫画精选"
+  },
+  "端脑": {
+    "cover": "posters/bgm-112978.jpg",
+    "match": "端脑",
+    "score": 1,
+    "source": "bangumi",
+    "id": 112978,
+    "note": "端脑"
+  },
+  "金田一少年事件簿 第一部 File 系列（爱藏版）": {
+    "cover": "posters/bgm-506306.jpg",
+    "match": "金田一少年之事件簿 极厚爱藏版",
+    "score": 1,
+    "source": "bangumi",
+    "id": 506306,
+    "note": "极厚爱藏版 金田一少年之事件簿"
+  },
+  "金田一少年事件簿 第二部 新系列": {
+    "cover": "posters/bgm-48108.jpg",
+    "match": "金田一少年事件簿  新系列",
+    "score": 1,
+    "source": "bangumi",
+    "id": 48108,
+    "note": "金田一少年事件簿 新系列"
+  },
+  "金田一少年事件簿 第二部 20 周年系列": {
+    "cover": "posters/bgm-17200.jpg",
+    "match": "金田一少年事件簿",
+    "score": 1,
+    "source": "bangumi",
+    "id": 17200,
+    "note": "金田一少年事件簿（原作系列）"
+  },
+  "金田一少年事件簿 R（第二部 R 系列）": {
+    "cover": "posters/bgm-96861.jpg",
+    "match": "金田一少年事件簿R",
+    "score": 1,
+    "source": "bangumi",
+    "id": 96861,
+    "note": "金田一少年事件簿R"
+  },
+  "金田一少年之事件簿 30th": {
+    "cover": "posters/bgm-365622.jpg",
+    "match": "金田一少年之事件簿 30周年纪念系列",
+    "score": 1,
+    "source": "bangumi",
+    "id": 365622,
+    "note": "金田一少年之事件簿 30周年纪念系列"
+  },
+  "谁杀了她": {
+    "cover": "posters/db-30210250.jpg",
+    "match": "谁杀了她",
+    "score": 0.77,
+    "source": "douban"
+  },
+  "东野圭吾「加贺恭一郎」系列": {
+    "cover": "posters/db-6746289.jpg",
+    "match": "新参者 : 加贺探案集8",
+    "score": 0.12,
+    "source": "douban"
+  },
+  "人间椅子": {
+    "cover": "posters/db-36049200.jpg",
+    "match": "人间椅子 : 江户川乱步猎奇篇",
+    "score": 0.86,
+    "source": "douban"
+  },
+  "克苏鲁神话 I：克苏鲁的呼唤": {
+    "cover": "posters/db-26862626.jpg",
+    "match": "克苏鲁神话",
+    "score": 0.76,
+    "source": "douban"
+  },
+  "怪画谜案": {
+    "cover": "posters/db-36858240.jpg",
+    "match": "怪画谜案",
+    "score": 0.83,
+    "source": "douban"
+  },
+  "罗生门（读客三个圈经典文库）": {
+    "cover": "posters/db-26786416.jpg",
+    "match": "罗生门 : 芥川龙之介小说集",
+    "score": 0.85,
+    "source": "douban"
+  },
+  "嫌疑人 X 的献身": {
+    "cover": "posters/db-3211779.jpg",
+    "match": "嫌疑人X的献身",
+    "score": 0.82,
+    "source": "douban"
+  },
+  "恶意": {
+    "cover": "posters/db-26877752.jpg",
+    "match": "恶意",
+    "score": 0.72,
+    "source": "douban"
+  },
+  "从前我死去的家": {
+    "cover": "posters/db-30245830.jpg",
+    "match": "从前我死去的家",
+    "score": 0.82,
+    "source": "douban"
+  }
+}
