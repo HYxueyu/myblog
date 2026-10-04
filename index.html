@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>小筑 · 我的生活手帐 | 记录生活、DIY 与 Vlog</title>
+  <meta name="description" content="一个记录生活日志、心得随笔、DIY 爱好笔记、照片与 Vlog 的个人博客。">
+  <meta name="keywords" content="个人博客,生活日志,DIY笔记,Vlog,摄影">
+  <!-- 结构化数据：告诉搜索引擎这是一个博客站点 -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Blog",
+    "name": "小筑 · 我的生活手帐",
+    "description": "记录生活日志、心得随笔、DIY 爱好笔记、照片与 Vlog 的个人博客",
+    "inLanguage": "zh-CN"
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== 公共页头 ========== -->
+  <header class="site-header">
+    <div class="container">
+      <a class="site-logo" href="index.html">小筑</a>
+      <button class="nav-toggle" aria-label="打开菜单">☰</button>
+      <nav class="site-nav">
+        <a href="index.html" class="active">首页</a>
+        <a href="blog.html">日志</a>
+        <a href="reading.html">阅读</a>
+        <a href="films.html">影视</a>
+        <a href="games.html">游戏</a>
+        <a href="gallery.html">相册</a>
+        <a href="vlog.html">Vlog</a>
+        <a href="about.html">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== Hero 欢迎区 ========== -->
+  <section class="hero">
+    <div class="container">
+      <h1>把日子过成喜欢的样子</h1>
+      <p>这里记录我的生活日志、心得随笔、DIY 手作笔记，还有随手拍下的照片和剪出来的 Vlog。</p>
+    </div>
+  </section>
+
+  <!-- ========== 最新日志 ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>最新日志</h2>
+        <a class="more" href="blog.html">全部日志 →</a>
+      </div>
+      <div class="post-grid" id="latest-posts">
+        <!-- 由 js/main.js 渲染 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 照片墙预览 ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>最近的照片</h2>
+        <a class="more" href="gallery.html">进入相册 →</a>
+      </div>
+      <div class="gallery-grid" id="home-gallery">
+        <!-- 由 js/main.js 渲染 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== Vlog 预览 ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>最新 Vlog</h2>
+        <a class="more" href="vlog.html">全部视频 →</a>
+      </div>
+      <div class="video-grid" id="video-grid">
+        <!-- 首页只放一条最新视频，由脚本填充 -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== 公共页脚 ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 小筑 · 用文字和镜头记录生活</p>
+      <p>慢慢写，慢慢拍，慢慢生活。</p>
+    </div>
+  </footer>
+
+  <script src="js/posts.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

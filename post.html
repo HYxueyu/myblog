@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>文章详情 · 小筑</title>
+  <!-- 详情页的 <title> 和 meta 由脚本根据文章数据动态更新 -->
+  <meta name="description" content="小筑博客文章详情页">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== 公共页头 ========== -->
+  <header class="site-header">
+    <div class="container">
+      <a class="site-logo" href="index.html">小筑</a>
+      <button class="nav-toggle" aria-label="打开菜单">☰</button>
+      <nav class="site-nav">
+        <a href="index.html">首页</a>
+        <a href="blog.html" class="active">日志</a>
+        <a href="reading.html">阅读</a>
+        <a href="films.html">影视</a>
+        <a href="games.html">游戏</a>
+        <a href="gallery.html">相册</a>
+        <a href="vlog.html">Vlog</a>
+        <a href="about.html">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== 文章正文（由脚本根据 ?id= 参数渲染） ========== -->
+  <article class="article-wrap" id="article"></article>
+
+  <!-- ========== 公共页脚 ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 小筑 · 用文字和镜头记录生活</p>
+    </div>
+  </footer>
+
+  <script src="js/posts.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

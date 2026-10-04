@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>阅读墙 · 小筑</title>
+  <meta name="description" content="我正在读和读过的书与漫画：封面墙、阅读进度、评分与一句话感想。">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "阅读墙",
+    "description": "书与漫画的阅读记录：在读、已读、想读，含进度与评分"
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== 公共页头 ========== -->
+  <header class="site-header">
+    <div class="container">
+      <a class="site-logo" href="index.html">小筑</a>
+      <button class="nav-toggle" aria-label="打开菜单">☰</button>
+      <nav class="site-nav">
+        <a href="index.html">首页</a>
+        <a href="blog.html">日志</a>
+        <a href="reading.html" class="active">阅读</a>
+        <a href="films.html">影视</a>
+        <a href="games.html">游戏</a>
+        <a href="gallery.html">相册</a>
+        <a href="vlog.html">Vlog</a>
+        <a href="about.html">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== 阅读墙 ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>阅读墙</h2>
+      </div>
+      <p style="color:var(--ink-soft);font-size:15px;margin-bottom:8px">
+        我的书与漫画记录。封面墙按「正在读 / 已读完 / 想读」分组，在读的带进度条，读完的带评分和一句话感想。
+      </p>
+      <!-- 数据在 js/library.js 的 READING 数组中维护：
+           更新进度、加书、补海报封面都可以直接改数据或告诉墨鸦 -->
+      <div id="reading-shelf"></div>
+    </div>
+  </section>
+
+  <!-- ========== 公共页脚 ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 小筑 · 用文字和镜头记录生活</p>
+    </div>
+  </footer>
+
+  <script src="js/posts.js"></script>
+  <script src="js/library.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

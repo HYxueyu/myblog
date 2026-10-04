@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Vlog · 小筑</title>
+  <meta name="description" content="我的视频日记：手工制作、生活改造与日常记录的 Vlog 合集。">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== 公共页头 ========== -->
+  <header class="site-header">
+    <div class="container">
+      <a class="site-logo" href="index.html">小筑</a>
+      <button class="nav-toggle" aria-label="打开菜单">☰</button>
+      <nav class="site-nav">
+        <a href="index.html">首页</a>
+        <a href="blog.html">日志</a>
+        <a href="reading.html">阅读</a>
+        <a href="films.html">影视</a>
+        <a href="games.html">游戏</a>
+        <a href="gallery.html">相册</a>
+        <a href="vlog.html" class="active">Vlog</a>
+        <a href="about.html">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== Vlog 视频列表 ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>我的 Vlog</h2>
+      </div>
+      <!-- 视频数据在 js/posts.js 的 VIDEOS 数组中维护，
+           填入 B 站 / YouTube 的嵌入地址即可在线播放 -->
+      <div class="video-grid" id="video-grid"></div>
+    </div>
+  </section>
+
+  <!-- ========== 公共页脚 ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 小筑 · 用文字和镜头记录生活</p>
+    </div>
+  </footer>
+
+  <script src="js/posts.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

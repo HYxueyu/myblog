@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>影视墙 · 小筑</title>
+  <meta name="description" content="我看过和在看的海报墙：电影与剧集记录，含追剧进度、评分与一句话影评。">
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "影视墙",
+    "description": "电影与剧集的观影记录：在看、已看、想看，含进度与评分"
+  }
+  </script>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== 公共页头 ========== -->
+  <header class="site-header">
+    <div class="container">
+      <a class="site-logo" href="index.html">小筑</a>
+      <button class="nav-toggle" aria-label="打开菜单">☰</button>
+      <nav class="site-nav">
+        <a href="index.html">首页</a>
+        <a href="blog.html">日志</a>
+        <a href="reading.html">阅读</a>
+        <a href="films.html" class="active">影视</a>
+        <a href="games.html">游戏</a>
+        <a href="gallery.html">相册</a>
+        <a href="vlog.html">Vlog</a>
+        <a href="about.html">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== 影视墙 ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>影视墙</h2>
+      </div>
+      <p style="color:var(--ink-soft);font-size:15px;margin-bottom:8px">
+        电影与剧集的海报墙。在看的标着追到第几集，看过的给评分和一句话影评。
+      </p>
+      <!-- 数据在 js/library.js 的 MOVIES 数组中维护：
+           剧集进度用文字表示（如 S2E05），海报封面拿到后填入 cover 字段 -->
+      <div id="film-shelf"></div>
+    </div>
+  </section>
+
+  <!-- ========== 公共页脚 ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 小筑 · 用文字和镜头记录生活</p>
+    </div>
+  </footer>
+
+  <script src="js/posts.js"></script>
+  <script src="js/library.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>

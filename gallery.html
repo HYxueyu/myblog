@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>相册 · 小筑</title>
+  <meta name="description" content="生活中的随手拍：手工、绿植、旧物与旅途的照片记录。">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+  <!-- ========== 公共页头 ========== -->
+  <header class="site-header">
+    <div class="container">
+      <a class="site-logo" href="index.html">小筑</a>
+      <button class="nav-toggle" aria-label="打开菜单">☰</button>
+      <nav class="site-nav">
+        <a href="index.html">首页</a>
+        <a href="blog.html">日志</a>
+        <a href="reading.html">阅读</a>
+        <a href="films.html">影视</a>
+        <a href="games.html">游戏</a>
+        <a href="gallery.html" class="active">相册</a>
+        <a href="vlog.html">Vlog</a>
+        <a href="about.html">关于</a>
+      </nav>
+    </div>
+  </header>
+
+  <!-- ========== 照片墙 ========== -->
+  <section class="section">
+    <div class="container">
+      <div class="section-head">
+        <h2>我的相册</h2>
+      </div>
+      <!-- 照片数据在 js/posts.js 的 PHOTOS 数组中维护，
+           替换为自己的照片时给对应条目加上 src 字段即可 -->
+      <div class="gallery-grid" id="gallery-grid"></div>
+    </div>
+  </section>
+
+  <!-- ========== 公共页脚 ========== -->
+  <footer class="site-footer">
+    <div class="container">
+      <p>© 2026 小筑 · 用文字和镜头记录生活</p>
+    </div>
+  </footer>
+
+  <script src="js/posts.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
