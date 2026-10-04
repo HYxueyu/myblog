@@ -992,6 +992,8 @@ html[data-theme="light"] .lightbox { background: rgba(20, 22, 26, 0.9); }
 /* JS 生成的占位封面（深色渐变），浅色下换成柔和浅色 */
 html[data-theme="light"] .post-cover.ph { background: linear-gradient(160deg, #e9ecf1, #dfe3ea); }
 html[data-theme="light"] .shelf-cover.ph { background: linear-gradient(160deg, #eceef2, #e0e4ea); }
+/* 有图的横幅封面：底色跟着模式走，横图上下留白才不难看 */
+html[data-theme="light"] .shelf-cover.is-wide { background: #eef0f3; }
 html[data-theme="light"] .photo-placeholder { background: linear-gradient(135deg, #eceef2, #e0e4ea); }
 html[data-theme="light"] .music-cover { background: linear-gradient(135deg, #e9ecf1, #dfe3ea); }
 html[data-theme="light"] .shelf-cover-title { color: var(--ink); text-shadow: none; }
