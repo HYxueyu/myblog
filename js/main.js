@@ -151,6 +151,119 @@ function renderShelf(container, items, defaultEmoji, labels) {
   container.innerHTML = html || '<p class="empty-tip">这里还空着，第一条记录正在路上 📚</p>';
 }
 
+/* ---------- 音乐播放器（底部悬浮播放条 + 音乐页歌单） ---------- */
+
+// 取有音源的歌曲；全局保存当前播放器，供音乐页点歌复用
+let MUSIC_PLAYER = null;
+
+// 初始化底部播放条：至少一首可播放的歌才显示
+function initMusicPlayer() {
+  const bar = document.getElementById("player-bar");
+  if (!bar) return null;
+
+  const songs = (typeof MUSIC !== "undefined" ? MUSIC : []).filter(function (s) { return s.src; });
+  if (songs.length === 0) { bar.remove(); return null; }
+
+  document.body.classList.add("has-player");   // 给页面底部留出空间
+  let index = 0;
+  const audio = new Audio(songs[index].src);
+
+  bar.innerHTML =
+    '<div class="player-inner">' +
+      '<button class="player-btn" id="player-prev" aria-label="上一首">⏮</button>' +
+      '<button class="player-btn player-toggle" id="player-toggle" aria-label="播放/暂停">▶</button>' +
+      '<button class="player-btn" id="player-next" aria-label="下一首">⏭</button>' +
+      '<div class="player-info">' +
+        '<span class="player-title" id="player-title"></span>' +
+        '<span class="player-artist" id="player-artist"></span>' +
+      "</div>" +
+      '<div class="player-progress" id="player-progress" role="slider" aria-label="播放进度">' +
+        '<div class="player-progress-fill" id="player-fill"></div>' +
+      "</div>" +
+      '<a class="player-link" href="music.html">歌单</a>' +
+    "</div>";
+
+  const toggleBtn = bar.querySelector("#player-toggle");
+  const titleEl = bar.querySelector("#player-title");
+  const artistEl = bar.querySelector("#player-artist");
+  const fillEl = bar.querySelector("#player-fill");
+
+  // 载入指定序号的歌曲
+  function loadSong(i) {
+    index = (i + songs.length) % songs.length;
+    audio.src = songs[index].src;
+    titleEl.textContent = songs[index].title;
+    artistEl.textContent = songs[index].artist || "";
+    fillEl.style.width = "0%";
+  }
+
+  // 播放 / 暂停切换
+  function togglePlay() {
+    if (audio.paused) { audio.play(); toggleBtn.textContent = "⏸"; }
+    else { audio.pause(); toggleBtn.textContent = "▶"; }
+  }
+
+  toggleBtn.addEventListener("click", togglePlay);
+  bar.querySelector("#player-prev").addEventListener("click", function () {
+    loadSong(index - 1); audio.play(); toggleBtn.textContent = "⏸";
+  });
+  bar.querySelector("#player-next").addEventListener("click", function () {
+    loadSong(index + 1); audio.play(); toggleBtn.textContent = "⏸";
+  });
+
+  // 进度条：点击跳转
+  bar.querySelector("#player-progress").addEventListener("click", function (e) {
+    const rect = this.getBoundingClientRect();
+    audio.currentTime = ((e.clientX - rect.left) / rect.width) * audio.duration;
+  });
+
+  // 播放中更新进度
+  audio.addEventListener("timeupdate", function () {
+    if (!audio.duration) return;
+    fillEl.style.width = (audio.currentTime / audio.duration * 100) + "%";
+  });
+
+  // 播完自动下一首
+  audio.addEventListener("ended", function () { loadSong(index + 1); audio.play(); });
+
+  loadSong(0);
+  MUSIC_PLAYER = {
+    songs: songs,
+    play: function (i) { loadSong(i); audio.play(); toggleBtn.textContent = "⏸"; },
+  };
+  return MUSIC_PLAYER;
+}
+
+// 渲染音乐页歌单
+function renderMusicList(container) {
+  if (!container) return;
+  const songs = typeof MUSIC !== "undefined" ? MUSIC : [];
+  if (songs.length === 0) {
+    container.innerHTML = '<p class="empty-tip">歌单还是空的 🎵</p>';
+    return;
+  }
+  container.innerHTML = songs.map(function (s, i) {
+    const ready = !!s.src;
+    return '<div class="music-item' + (ready ? "" : " music-item-disabled") + '" data-index="' + i + '">' +
+      '<div class="music-cover"' + (s.cover ? ' style="background-image:url(' + s.cover + ');background-size:cover"' : "") + ">" +
+        (s.cover ? "" : '<span>🎵</span>') +
+      "</div>" +
+      '<div class="music-meta"><h3>' + s.title + "</h3><p>" + (s.artist || "") + "</p></div>" +
+      '<span class="music-status">' + (ready ? "播放" : "待补充") + "</span>" +
+    "</div>";
+  }).join("");
+
+  // 点击可播放的歌曲 → 交给底部播放条播放
+  container.querySelectorAll(".music-item").forEach(function (el) {
+    el.addEventListener("click", function () {
+      const i = parseInt(el.getAttribute("data-index"), 10);
+      const s = songs[i];
+      if (!s.src) return;
+      if (MUSIC_PLAYER) MUSIC_PLAYER.play(MUSIC_PLAYER.songs.indexOf(s));
+    });
+  });
+}
+
 /* ---------- 各页面渲染入口 ---------- */
 document.addEventListener("DOMContentLoaded", function () {
   // 移动端汉堡菜单开关
@@ -169,6 +282,14 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---- 首页：照片墙预览（前 4 张） ----
   const homePhotos = document.getElementById("home-gallery");
   if (homePhotos) renderGallery(homePhotos, PHOTOS.slice(0, 4));
+
+  // ---- 音乐：底部播放条（全站）+ 音乐页歌单 ----
+  initMusicPlayer();
+  const musicList = document.getElementById("music-list");
+  if (musicList) {
+    renderMusicList(musicList);
+    document.title = "音乐 · 小筑";
+  }
 
   // ---- 阅读墙页（数据在 js/library.js 的 READING 数组） ----
   const shelfBox = document.getElementById("reading-shelf");

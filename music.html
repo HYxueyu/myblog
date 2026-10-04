@@ -3,16 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>影视墙 · 小筑</title>
-  <meta name="description" content="我看过和在看的海报墙：电影与剧集记录，含追剧进度、评分与一句话影评。">
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "CollectionPage",
-    "name": "影视墙",
-    "description": "电影与剧集的观影记录：在看、已看、想看，含进度与评分"
-  }
-  </script>
+  <title>音乐 · 小筑</title>
+  <meta name="description" content="我的歌单：写东西、做手工、骑车时循环的那些歌。">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -26,29 +18,39 @@
         <a href="index.html">首页</a>
         <a href="blog.html">日志</a>
         <a href="reading.html">阅读</a>
-        <a href="films.html" class="active">影视</a>
+        <a href="films.html">影视</a>
         <a href="games.html">游戏</a>
         <a href="gallery.html">相册</a>
         <a href="vlog.html">Vlog</a>
-        <a href="music.html">音乐</a>
-
+        <a href="music.html" class="active">音乐</a>
         <a href="about.html">关于</a>
       </nav>
     </div>
   </header>
 
-  <!-- ========== 影视墙 ========== -->
+  <!-- ========== 歌单 ========== -->
   <section class="section">
     <div class="container">
       <div class="section-head">
-        <h2>影视墙</h2>
+        <h2>我的歌单</h2>
       </div>
-      <p style="color:var(--ink-soft);font-size:15px;margin-bottom:8px">
-        电影与剧集的海报墙。在看的标着追到第几集，看过的给评分和一句话影评。
+      <p style="color:var(--ink-soft);font-size:15px;margin-bottom:20px">
+        点歌名就能播放，底部播放条会一直跟着你，翻其他页面也不会中断。
       </p>
-      <!-- 数据在 js/library.js 的 MOVIES 数组中维护：
-           剧集进度用文字表示（如 S2E05），海报封面拿到后填入 cover 字段 -->
-      <div id="film-shelf"></div>
+      <!-- 歌单数据在 js/posts.js 的 MUSIC 数组中维护 -->
+      <div id="music-list"></div>
+
+      <div class="about-card" style="margin-top:28px;padding:28px">
+        <h2 style="margin-top:0">怎么加歌</h2>
+        <p>把 mp3 放进博客的 <code>music/</code> 文件夹，然后在 <code>js/posts.js</code> 的 <code>MUSIC</code> 数组里加一条：</p>
+        <pre class="post-note" style="padding:14px 16px;line-height:1.7"><code>{
+  title: "歌曲名",
+  artist: "歌手",
+  src: "music/歌曲.mp3",
+  cover: ""        // 封面图，可留空
+}</code></pre>
+        <p>音乐文件和网站一起托管在 Cloudflare 上，国内加载快，不依赖音乐平台。<strong>至少有一首歌填了 src，底部播放条才会出现。</strong></p>
+      </div>
     </div>
   </section>
 
@@ -62,7 +64,7 @@
   <!-- 底部悬浮播放条容器（由 js/main.js 填充，歌单为空时不显示） -->
   <div class="player-bar" id="player-bar"></div>
 
-<script src="js/posts.js"></script>
+  <script src="js/posts.js"></script>
   <script src="js/library.js"></script>
   <script src="js/main.js"></script>
 </body>
