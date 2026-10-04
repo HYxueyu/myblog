@@ -1,0 +1,17 @@
+# 旧 Hexo 博客链接 → 小筑新链接（避免旧链接 404）
+/2026/09/%E6%88%91%E7%9A%84%E7%AC%AC%E4%B8%80%E7%AF%87%E5%8D%9A%E5%AE%A2-%E4%BD%A0%E5%A5%BD%E6%9C%8B%E5%8F%8B/  /post.html?id=my-first-post  301
+/2026/09/DIY%E6%89%8B%E5%B7%A5%E5%8F%B0%E7%81%AF%E5%88%B6%E4%BD%9C%E6%95%99%E7%A8%8B/  /post.html?id=diy-lamp  301
+/2026/09/%E5%91%A8%E6%9C%AB%E5%8E%BB%E7%88%AC%E5%B1%B1%E4%BA%86/  /post.html?id=weekend-mountain  301
+/2026/09/%E4%BB%8A%E5%A4%A9%E6%8B%8D%E4%BA%86%E4%B8%80%E6%94%AFVlog/  /post.html?id=vlog-a-day  301
+/2026/09/%E5%A1%9E%E5%B0%94%E8%BE%BE%E6%94%BB%E7%95%A5-%E7%A5%9E%E5%BA%99%E5%85%A8%E6%94%B6%E9%9B%86/  /post.html?id=zelda-shrine-guide  301
+/2026/09/PyCharm%E5%86%99%E5%8D%9A%E5%AE%A2%E6%95%99%E7%A8%8B/  /post.html?id=pycharm-blog  301
+/2026/09/%E6%B2%99%E4%B8%81%E9%B1%BC%E7%8B%97%E9%9B%B6%E9%A3%9F%EF%BC%88%E7%83%98%E5%B9%B2%E7%89%88%EF%BC%89/  /post.html?id=shadinyu-treats  301
+/2026/09/%E6%91%A9%E6%89%98%E8%BD%A6%E4%BF%9D%E5%85%BB%E7%AC%94%E8%AE%B0/  /post.html?id=motorcycle-maintenance  301
+/2026/09/%E5%89%AA%E8%BE%91%E6%9E%84%E6%80%9D/  /post.html?id=side-hustle-idea  301
+/2026/09/hello-world/  /blog.html  301
+/about/  /about.html  301
+/gallery/  /gallery.html  301
+/tags/*  /blog.html  301
+/categories/*  /blog.html  301
+/archives/*  /blog.html  301
+/*  /index.html  404
