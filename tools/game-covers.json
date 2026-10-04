@@ -1,0 +1,188 @@
+{
+  "Red Dead Redemption 2": {
+    "cover": "posters/steam-1174180.jpg",
+    "match": "Red Dead Redemption 2",
+    "source": "steam",
+    "via": "Steam#1174180 (1.00)"
+  },
+  "星露谷物语": {
+    "cover": "posters/steam-413150.jpg",
+    "match": "Stardew Valley",
+    "source": "steam",
+    "via": "Steam#413150 (1.00)"
+  },
+  "Horizon Zero Dawn Remastered": {
+    "cover": "posters/steam-2561580.jpg",
+    "match": "《地平线 零之曙光™》重制版",
+    "source": "steam",
+    "via": "Steam#2561580 (0.00)"
+  },
+  "Monster Hunter: World": {
+    "cover": "posters/steam-582010.jpg",
+    "match": "Monster Hunter: World",
+    "source": "steam",
+    "via": "Steam#582010 (1.00)"
+  },
+  "DAVE THE DIVER": {
+    "cover": "posters/steam-1868140.jpg",
+    "match": "潜水员戴夫 DAVE THE DIVER",
+    "source": "steam",
+    "via": "Steam#1868140 (0.85)"
+  },
+  "Sultan's Game": {
+    "cover": "posters/steam-3117820.jpg",
+    "match": "苏丹的游戏",
+    "source": "steam",
+    "via": "Steam#3117820 (0.00)"
+  },
+  "God of War": {
+    "cover": "posters/steam-1593500.jpg",
+    "match": "God of War",
+    "source": "steam",
+    "via": "Steam#1593500 (1.00)"
+  },
+  "DEATH STRANDING DIRECTOR'S CUT": {
+    "cover": "posters/steam-1850570.jpg",
+    "match": "DEATH STRANDING DIRECTOR'S CUT",
+    "source": "steam",
+    "via": "Steam#1850570 (1.00)"
+  },
+  "黑神话：悟空": {
+    "cover": "posters/steam-2358720.jpg",
+    "match": "黑神话：悟空",
+    "source": "steam",
+    "via": "Steam#2358720 (0.00)"
+  },
+  "It Takes Two": {
+    "cover": "posters/steam-1426210.jpg",
+    "match": "It Takes Two",
+    "source": "steam",
+    "via": "Steam#1426210 (人工核对)"
+  },
+  "FINAL FANTASY VII REBIRTH": {
+    "cover": "posters/steam-2909400.jpg",
+    "match": "FINAL FANTASY VII REBIRTH",
+    "source": "steam",
+    "via": "Steam#2909400 (1.00)"
+  },
+  "FINAL FANTASY XVI": {
+    "cover": "posters/steam-2515020.jpg",
+    "match": "FINAL FANTASY XVI",
+    "source": "steam",
+    "via": "Steam#2515020 (1.00)"
+  },
+  "The Last of Us Part I": {
+    "cover": "posters/steam-1888930.jpg",
+    "match": "The Last of Us™ Part I",
+    "source": "steam",
+    "via": "Steam#1888930 (1.00)"
+  },
+  "Uncharted 4: A Thief’s End": {
+    "cover": "posters/steam-1659420.jpg",
+    "match": "UNCHARTED™: 盗贼传奇合辑",
+    "source": "steam",
+    "via": "Steam#1659420 (0.15)"
+  },
+  "Call of Duty Modern Warfare": {
+    "cover": "posters/steam-2000950.jpg",
+    "match": "Call of Duty®: Modern Warfare®",
+    "source": "steam",
+    "via": "Steam#2000950 (1.00)"
+  },
+  "Call of Duty": {
+    "cover": "posters/steam-2000950.jpg",
+    "match": "Call of Duty",
+    "source": "steam",
+    "via": "Steam#2000950 (人工核对)"
+  },
+  "Delta Force": {
+    "cover": "posters/steam-2507950.jpg",
+    "match": "Delta Force",
+    "source": "steam",
+    "via": "Steam#2507950 (人工核对)"
+  },
+  "Spacewar": {
+    "cover": "posters/bgm-game-704979.jpg",
+    "match": "RetroWar: 8-bit Party Battle",
+    "source": "bgm",
+    "via": "Bangumi (0.26)"
+  },
+  "空の軌跡 the 1st Demo": {
+    "cover": "posters/bgm-game-260.jpg",
+    "match": "英雄传说6：空之轨迹",
+    "source": "bgm",
+    "via": "Bangumi (0.06)"
+  },
+  "The Last of Us Remastered": {
+    "cover": "posters/bgm-game-490661.jpg",
+    "match": "最后生还者：第二部 Remastered",
+    "source": "bgm",
+    "via": "Bangumi (0.18)"
+  },
+  "艾尔登法环：黄金树幽影": {
+    "cover": "posters/bgm-game-284100.jpg",
+    "match": "艾尔登法环",
+    "source": "bgm",
+    "via": "Bangumi (1.00)"
+  },
+  "Cyberpunk 2077": {
+    "cover": "posters/steam-1091500.jpg",
+    "match": "Cyberpunk 2077",
+    "source": "steam",
+    "via": "Steam#1091500 (人工核对)"
+  },
+  "The Witcher 3: Wild Hunt": {
+    "cover": "posters/steam-292030.jpg",
+    "match": "The Witcher 3: Wild Hunt",
+    "source": "steam",
+    "via": "Steam#292030 (人工核对)"
+  },
+  "Metro Exodus": {
+    "cover": "posters/steam-412020.jpg",
+    "match": "Metro Exodus",
+    "source": "steam",
+    "via": "Steam#412020 (人工核对)"
+  },
+  "Borderlands 3": {
+    "cover": "posters/steam-397540.jpg",
+    "match": "Borderlands 3",
+    "source": "steam",
+    "via": "Steam#397540 (人工核对)"
+  },
+  "eFootball": {
+    "cover": "posters/bgm-game-625842.jpg",
+    "match": "eFootball Kick-Off!",
+    "source": "bangumi",
+    "via": "Bangumi#625842 (0.80)"
+  },
+  "Where Winds Meet": {
+    "cover": "posters/bgm-game-397705.jpg",
+    "match": "燕云十六声",
+    "source": "bangumi",
+    "via": "Bangumi#397705 (0.77)"
+  },
+  "Arknights: Endfield": {
+    "cover": "posters/bgm-game-374638.jpg",
+    "match": "明日方舟：终末地",
+    "source": "bangumi",
+    "via": "Bangumi#374638 (0.77)"
+  },
+  "Neverness to Everness": {
+    "cover": "posters/bgm-game-503983.jpg",
+    "match": "异环",
+    "source": "bangumi",
+    "via": "Bangumi#503983 (0.77)"
+  },
+  "Zenless Zone Zero": {
+    "cover": "posters/bgm-game-380974.jpg",
+    "match": "绝区零",
+    "source": "bangumi",
+    "via": "Bangumi#380974 (0.77)"
+  },
+  "Wuthering Waves": {
+    "cover": "posters/bgm-game-385208.jpg",
+    "match": "鸣潮",
+    "source": "bangumi",
+    "via": "Bangumi#385208 (0.77)"
+  }
+}
