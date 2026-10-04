@@ -591,6 +591,11 @@ a:hover { color: var(--accent); }
   font-weight: 600;
 }
 
+/* ---------- 评论区（Twikoo） ---------- */
+.comment-wrap { padding-top: 0; }
+
+.comment-wrap #twikoo:empty { display: none; }
+
 /* ---------- 页脚 ---------- */
 .site-footer {
   margin-top: 64px;

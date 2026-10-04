@@ -31,6 +31,11 @@
   <!-- ========== 文章正文（由脚本根据 ?id= 参数渲染） ========== -->
   <article class="article-wrap" id="article"></article>
 
+  <!-- ========== 评论区（Twikoo，需在 js/config.js 填后端地址才显示） ========== -->
+  <div class="article-wrap comment-wrap">
+    <div id="twikoo"></div>
+  </div>
+
   <!-- ========== 公共页脚 ========== -->
   <footer class="site-footer">
     <div class="container">
@@ -38,6 +43,7 @@
     </div>
   </footer>
 
+  <script src="js/config.js"></script>
   <script src="js/posts.js"></script>
   <script src="js/main.js"></script>
 </body>

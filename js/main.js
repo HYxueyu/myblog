@@ -231,6 +231,21 @@ document.addEventListener("DOMContentLoaded", function () {
       "</div>" +
       '<div class="article-content">' + post.content + "</div>" +
       '<a class="back-link" href="blog.html">← 返回日志列表</a>';
+
+    // 评论区：仅在 js/config.js 填了 Twikoo 后端地址时加载
+    if (typeof SITE_CONFIG !== "undefined" && SITE_CONFIG.twikooEnvId) {
+      const script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/twikoo@1.6.44/dist/twikoo.min.js";
+      script.onload = function () {
+        twikoo.init({
+          envId: SITE_CONFIG.twikooEnvId,
+          el: "#twikoo",
+          path: "post.html?id=" + post.id,   // 每篇文章独立的评论路径
+          lang: "zh-CN",
+        });
+      };
+      document.body.appendChild(script);
+    }
   }
 
   // ---- 照片墙页 ----
