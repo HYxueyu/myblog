@@ -14,30 +14,41 @@
   }
   </script>
   <link rel="stylesheet" href="css/style.css">
+  <!-- 明暗模式初始化：在页面渲染前定好主题，避免刷新时闪白 -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("xiaozhu-theme");
+        if (t !== "light" && t !== "dark") {
+          t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { document.documentElement.setAttribute("data-theme", "dark"); }
+    })();
+  </script>
 </head>
 <body>
 
-  <!-- ========== 公共页头 ========== -->
-  <header class="site-header">
-    <div class="container">
-      <a class="site-logo" href="index.html">小筑</a>
-      <button class="nav-toggle" aria-label="打开菜单">☰</button>
-      <nav class="site-nav">
-        <a href="index.html">首页</a>
-        <a href="blog.html">日志</a>
-        <a href="reading.html">阅读</a>
-        <a href="films.html">影视</a>
-        <a href="games.html" class="active">游戏</a>
-        <a href="gallery.html">相册</a>
-        <a href="vlog.html">Vlog</a>
-        <a href="music.html">音乐</a>
+<!-- ========== 左侧固定侧边栏（机核风布局） ========== -->
+<aside class="sidebar">
+  <a class="site-logo" href="index.html">小筑</a>
+  <p class="side-sub">记录生活与热爱</p>
+  <nav class="side-nav"><a href="index.html">首页</a><a href="blog.html">日志</a><a href="reading.html">阅读</a><a href="films.html">影视</a><a href="games.html" class="active">游戏</a><a href="gallery.html">相册</a><a href="vlog.html">Vlog</a><a href="music.html">音乐</a><a href="about.html">关于</a></nav>
+  <div class="side-foot">© 2026 小筑</div>
+</aside>
 
-        <a href="about.html">关于</a>
-      </nav>
-    </div>
-  </header>
+<div class="page-shell">
 
-  <!-- ========== 游戏墙 ========== -->
+<!-- ========== 移动端顶栏（桌面端隐藏） ========== -->
+<header class="topbar">
+  <button class="nav-toggle" aria-label="打开菜单">☰</button>
+  <a class="topbar-logo" href="index.html">小筑</a>
+  <nav class="site-nav"><a href="index.html">首页</a><a href="blog.html">日志</a><a href="reading.html">阅读</a><a href="films.html">影视</a><a href="games.html" class="active">游戏</a><a href="gallery.html">相册</a><a href="vlog.html">Vlog</a><a href="music.html">音乐</a><a href="about.html">关于</a></nav>
+</header>
+
+
+
+    <!-- ========== 游戏墙 ========== -->
   <section class="section">
     <div class="container">
       <div class="section-head">
@@ -57,6 +68,8 @@
       <p>© 2026 小筑 · 用文字和镜头记录生活</p>
     </div>
   </footer>
+
+  </div><!-- /page-shell -->
 
   <!-- 底部悬浮播放条容器（由 js/main.js 填充，歌单为空时不显示） -->
   <div class="player-bar" id="player-bar"></div>

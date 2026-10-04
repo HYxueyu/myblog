@@ -477,17 +477,41 @@ cover: /img/cover-hello_w.jpg
 ];
 
 /* ============================================================
-   照片墙数据
-   ★ 图片放在 img/ 文件夹下，src 填相对路径即可。
-     照片为大文件时建议先压缩（宽度 ≤1600px）再上传。
+   相册数据（按相册分类）
+   ------------------------------------------------------------
+   ★ 加一个相册：在 ALBUMS 数组加一条 { name: "相册名", photos: [...] }
+   ★ 加一张照片：往对应相册的 photos 里加 { src, caption }
+       src     图片路径（img/ 下），建议先压缩到宽度 ≤1600px
+       caption 照片说明（放大查看时显示）
+   ★ 首页"最近的照片"会自动取所有相册里最新的几张
    ============================================================ */
-const PHOTOS = [
-  { src: "img/life1_w.jpg", caption: "生活记录 01" },
-  { src: "img/life2_w.jpg", caption: "生活记录 02" },
-  { src: "img/life3_w.jpg", caption: "生活记录 03" },
-  { src: "img/cover-mountain_w.jpg", caption: "周末去爬山了" },
-  { src: "img/cover-diy_w.jpg", caption: "DIY 手工台灯" },
-  { src: "img/shadinyu_w.jpg", caption: "沙丁鱼狗零食（烘干版）" },
+const ALBUMS = [
+  {
+    name: "生活",
+    photos: [
+      { src: "img/life1_w.jpg", caption: "生活记录 01" },
+      { src: "img/life2_w.jpg", caption: "生活记录 02" },
+      { src: "img/life3_w.jpg", caption: "生活记录 03" },
+    ],
+  },
+  {
+    name: "户外",
+    photos: [
+      { src: "img/cover-mountain_w.jpg", caption: "周末去爬山了" },
+    ],
+  },
+  {
+    name: "DIY",
+    photos: [
+      { src: "img/cover-diy_w.jpg", caption: "DIY 手工台灯" },
+    ],
+  },
+  {
+    name: "下厨",
+    photos: [
+      { src: "img/shadinyu_w.jpg", caption: "沙丁鱼狗零食（烘干版）" },
+    ],
+  },
 ];
 
 /* ============================================================

@@ -6,38 +6,53 @@
   <title>相册 · 小筑</title>
   <meta name="description" content="生活中的随手拍：手工、绿植、旧物与旅途的照片记录。">
   <link rel="stylesheet" href="css/style.css">
+  <!-- 明暗模式初始化：在页面渲染前定好主题，避免刷新时闪白 -->
+  <script>
+    (function () {
+      try {
+        var t = localStorage.getItem("xiaozhu-theme");
+        if (t !== "light" && t !== "dark") {
+          t = window.matchMedia && window.matchMedia("(prefers-color-scheme: light)").matches ? "light" : "dark";
+        }
+        document.documentElement.setAttribute("data-theme", t);
+      } catch (e) { document.documentElement.setAttribute("data-theme", "dark"); }
+    })();
+  </script>
 </head>
 <body>
 
-  <!-- ========== 公共页头 ========== -->
-  <header class="site-header">
-    <div class="container">
-      <a class="site-logo" href="index.html">小筑</a>
-      <button class="nav-toggle" aria-label="打开菜单">☰</button>
-      <nav class="site-nav">
-        <a href="index.html">首页</a>
-        <a href="blog.html">日志</a>
-        <a href="reading.html">阅读</a>
-        <a href="films.html">影视</a>
-        <a href="games.html">游戏</a>
-        <a href="gallery.html" class="active">相册</a>
-        <a href="vlog.html">Vlog</a>
-        <a href="music.html">音乐</a>
+<!-- ========== 左侧固定侧边栏（机核风布局） ========== -->
+<aside class="sidebar">
+  <a class="site-logo" href="index.html">小筑</a>
+  <p class="side-sub">记录生活与热爱</p>
+  <nav class="side-nav"><a href="index.html">首页</a><a href="blog.html">日志</a><a href="reading.html">阅读</a><a href="films.html">影视</a><a href="games.html">游戏</a><a href="gallery.html" class="active">相册</a><a href="vlog.html">Vlog</a><a href="music.html">音乐</a><a href="about.html">关于</a></nav>
+  <div class="side-foot">© 2026 小筑</div>
+</aside>
 
-        <a href="about.html">关于</a>
-      </nav>
-    </div>
-  </header>
+<div class="page-shell">
 
-  <!-- ========== 照片墙 ========== -->
+<!-- ========== 移动端顶栏（桌面端隐藏） ========== -->
+<header class="topbar">
+  <button class="nav-toggle" aria-label="打开菜单">☰</button>
+  <a class="topbar-logo" href="index.html">小筑</a>
+  <nav class="site-nav"><a href="index.html">首页</a><a href="blog.html">日志</a><a href="reading.html">阅读</a><a href="films.html">影视</a><a href="games.html">游戏</a><a href="gallery.html" class="active">相册</a><a href="vlog.html">Vlog</a><a href="music.html">音乐</a><a href="about.html">关于</a></nav>
+</header>
+
+
+
+    <!-- ========== 照片墙 ========== -->
   <section class="section">
     <div class="container">
       <div class="section-head">
         <h2>我的相册</h2>
       </div>
-      <!-- 照片数据在 js/posts.js 的 PHOTOS 数组中维护，
-           替换为自己的照片时给对应条目加上 src 字段即可 -->
-      <div class="gallery-grid" id="gallery-grid"></div>
+      <p style="color:var(--ink-soft);font-size:15px;margin-bottom:8px">
+        照片按相册分类整理。点击图片可以放大查看，左右方向键翻页，Esc 关闭。
+      </p>
+      <!-- 相册数据在 js/posts.js 的 ALBUMS 数组中维护：
+           每个相册一条 { name: "相册名", photos: [{ src, caption }] } -->
+      <nav class="album-tabs" id="album-tabs"></nav>
+      <div id="album-list"></div>
     </div>
   </section>
 
@@ -47,6 +62,8 @@
       <p>© 2026 小筑 · 用文字和镜头记录生活</p>
     </div>
   </footer>
+
+  </div><!-- /page-shell -->
 
   <!-- 底部悬浮播放条容器（由 js/main.js 填充，歌单为空时不显示） -->
   <div class="player-bar" id="player-bar"></div>

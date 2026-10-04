@@ -189,7 +189,7 @@ const GAMES = [
     progress: "一周目 142 小时",
     rating: 5,
     comment: "年度游戏没有悬念。队友全员立体的 CRPG 天花板，二周目排队中。",
-    cover: "posters/bg3.jpg",
+    cover: { src: "posters/bg3-poster.jpg", banner: false },
     emoji: "🎲",
   },
   {
@@ -200,7 +200,7 @@ const GAMES = [
     progress: 55,
     rating: 0,
     comment: "第三章的黄风岭配乐封神。手残党在虎先锋面前卡了两晚上。",
-    cover: "posters/wukong.jpg",
+    cover: { src: "posters/wukong-poster.jpg", banner: false },
     emoji: "🐒",
   },
   {
@@ -211,7 +211,7 @@ const GAMES = [
     progress: "三年目",
     rating: 4.5,
     comment: "电子布洛芬。压力大的时候回去种两天地，什么都好了。",
-    cover: "posters/sdv.jpg",
+    cover: { src: "posters/sdv-poster.jpg", banner: false },
     emoji: "🌾",
   },
   {
