@@ -12,6 +12,10 @@ tools/*.png
 tools/_probe.js
 tools/cover-result.tmp.json
 
+# 脚本运行日志（含本地环境信息，不入库）
+tools/set-pages-env.log
+tools/*.log
+
 # 系统
 .DS_Store
 Thumbs.db
