@@ -69,7 +69,7 @@ export async function onRequest(context) {
     // 回调地址必须是本函数的公开地址，且与 GitHub OAuth App 里填的一字不差
     const redirectUri = "https://blog.heiyunas.top/api/auth";
 
-    const state = url.searchParams.get("site_id") || "";
+    const state = sanitizeState(url.searchParams.get("site_id"));
     const scope = url.searchParams.get("scope") || "repo,user";
 
     const auth = new URL(GITHUB_AUTHORIZE);
@@ -151,6 +151,21 @@ export async function onRequest(context) {
     status: 200,
     headers: { "Content-Type": "text/html; charset=utf-8" },
   });
+}
+
+/**
+ * 清洗 state 参数。
+ * Decap 传的是 site_id，但 config.yml 没配 site_domain 时前端会传字面量
+ * "undefined"（不是真的 undefined），直接透传给 GitHub 会让 state 变脏。
+ * 只放行像主机名的值。
+ */
+function sanitizeState(raw) {
+  if (!raw) return "";
+  const v = String(raw).trim();
+  if (!v || v === "undefined" || v === "null") return "";
+  // 主机名白名单：字母数字、点、连字符，可带端口
+  if (!/^[a-zA-Z0-9.-]+(:\d+)?$/.test(v)) return "";
+  return v;
 }
 
 /**

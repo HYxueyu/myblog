@@ -13,6 +13,11 @@ backend:
   # 登录后跳转与回调由 Cloudflare Pages 的 /api/auth 处理
   base_url: https://blog.heiyunas.top
   auth_endpoint: api/auth
+  # ★ 必须与 base_url 的主机名一致。
+  #   Decap 用 site_domain 作为 site_id 传给 /api/auth；
+  #   不配的话会传成 site_id=undefined，虽然不影响握手，
+  #   但会让 state 参数失真，且本地 localhost 调试时也会走错分支。
+  site_domain: blog.heiyunas.top
 
 # 媒体文件（封面图）存放位置
 media_folder: "posters"
