@@ -35,13 +35,16 @@ editor:
 
 collections:
   # ======================== 游戏墙 ========================
+  # 提示：Decap 的「文件集合」是两层结构 —— 这里只显示文件卡片，
+  #       点进「游戏列表」那张卡片才会看到 47 个游戏条目。
   - name: "games"
     label: "游戏墙"
     label_singular: "游戏"
-    description: "游戏墙数据（对应 data/games.json）"
+    description: "点开下面这张卡片 → 编辑游戏条目"
     files:
       - name: "games_data"
         label: "游戏列表"
+        description: "点这里 → 查看 / 修改 47 个游戏"
         file: "data/games.json"
         format: json
         fields:
@@ -95,10 +98,11 @@ collections:
   - name: "reading"
     label: "阅读墙"
     label_singular: "书 / 漫画"
-    description: "阅读墙数据（对应 data/reading.json）"
+    description: "点开下面这张卡片 → 编辑书目条目"
     files:
       - name: "reading_data"
         label: "书目列表"
+        description: "点这里 → 查看 / 修改书目"
         file: "data/reading.json"
         format: json
         fields:
@@ -138,10 +142,11 @@ collections:
   - name: "films"
     label: "影视墙"
     label_singular: "电影 / 剧集"
-    description: "影视墙数据（对应 data/films.json）"
+    description: "点开下面这张卡片 → 编辑影视条目"
     files:
       - name: "films_data"
         label: "影视列表"
+        description: "点这里 → 查看 / 修改影视"
         file: "data/films.json"
         format: json
         fields:
