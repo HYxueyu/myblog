@@ -159,6 +159,8 @@ vm.createContext(ctx);
 vm.runInContext(read("js/posts.js"), ctx);
 vm.runInContext(read("js/library.js"), ctx);
 vm.runInContext(read("js/main.js"), ctx);
+// 把数组挂到全局，方便断言里按数据动态算（const 声明不会自动挂到 ctx）
+vm.runInContext("this.GAMES = GAMES; this.READING = READING; this.MOVIES = MOVIES;", ctx);
 
 // 触发 DOMContentLoaded
 (document._domReady || []).forEach((fn) => fn());
@@ -185,7 +187,11 @@ ok("游戏墙第一页有 24 张卡片", (shelfBox._cards || []).length === 24,
 ok("有分页控件", /shelf-pager/.test(shelfBox.innerHTML));
 ok("分页信息显示总页数", /\/ \d+ 页/.test(shelfBox.innerHTML),
   (shelfBox.innerHTML.match(/pager-info">([^<]+)/) || [])[1]);
-ok("分组标题显示筛选后总数（在玩 33）", /在玩（33）/.test(shelfBox.innerHTML));
+// 分组标题的总数应等于数据里在玩条数，随数据变动自动校验
+const playingTotal = (ctx.GAMES || []).filter((x) => x.status === "playing").length;
+ok("分组标题显示筛选后总数（在玩 " + playingTotal + "）",
+  new RegExp("在玩（" + playingTotal + "）").test(shelfBox.innerHTML),
+  (shelfBox.innerHTML.match(/shelf-group-title">([^<]+)/) || [])[1]);
 
 console.log("\n=== 卡片可点击 ===");
 const card0 = (shelfBox._cards || [])[0];
@@ -194,6 +200,7 @@ ok("卡片是 role=button", /role="button"/.test(shelfBox.innerHTML));
 ok("卡片有 tabindex（键盘可达）", /tabindex="0"/.test(shelfBox.innerHTML));
 
 console.log("\n=== 筛选交互：点「状态 → 想玩」 ===");
+const wishTotal = (ctx.GAMES || []).filter((x) => x.status === "wish").length;
 // 筛选条按钮监听器已绑定在 filterBox 的桩上
 const pills = filterBox._pills || [];
 const wantPlay = pills.find((p) => p.getAttribute("data-fk") === "status" && p.getAttribute("data-fv") === "想玩");
@@ -201,7 +208,7 @@ if (wantPlay) {
   wantPlay.dispatch("click");
   ok("筛后分组只剩想玩", /愿望单/.test(shelfBox.innerHTML) && !/在玩（/.test(shelfBox.innerHTML),
     (shelfBox.innerHTML.match(/shelf-group-title">([^<]+)/) || [])[1]);
-  ok("想玩共 15 条", /愿望单（15）/.test(shelfBox.innerHTML),
+  ok("想玩共 " + wishTotal + " 条", new RegExp("愿望单（" + wishTotal + "）").test(shelfBox.innerHTML),
     (shelfBox.innerHTML.match(/shelf-group-title">([^<]+)/) || [])[1]);
 } else {
   ok("找到「想玩」筛选按钮", false);
