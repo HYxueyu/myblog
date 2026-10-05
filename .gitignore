@@ -20,3 +20,7 @@ desktop.ini
 # 编辑器
 .vscode/
 .idea/
+
+# 提交信息草稿
+tools/_commitmsg.txt
+tools/_*.js
