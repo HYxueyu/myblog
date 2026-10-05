@@ -101,8 +101,12 @@ function check(name, cond, extra) {
 
   console.log("\n========== 测试 1：未配环境变量时点登录 ==========");
   {
+    // 把环境变量临时清空再测（不能依赖外部没传，否则本机有值时断言必挂）
+    const savedId = env.GITHUB_CLIENT_ID;
+    env.GITHUB_CLIENT_ID = "";
     const r = await hit("/api/auth?provider=github");
     check("返回 500 且提示未配置", r.code === 500 && /GITHUB_CLIENT_ID/.test(r.body), "code=" + r.code);
+    env.GITHUB_CLIENT_ID = savedId;
   }
 
   // 补上环境变量
@@ -143,12 +147,39 @@ function check(name, cond, extra) {
     check("含 CORS 头", !!r.headers["access-control-allow-origin"], r.headers["access-control-allow-origin"]);
   }
 
-  console.log("\n========== 测试 5：带 code 换 token（模拟 GitHub 返回错误） ==========");
+  console.log("\n========== 测试 5：带 code 换 token ==========");
   {
     const r = await hit("/api/auth?provider=github&code=fakecode");
-    // 真实 GitHub 会拒绝假 code，我们会收到 error；函数应返回 400
     check("不是 500 崩溃", r.code !== 500, "code=" + r.code);
-    console.log("    返回体前 200 字: " + r.body.slice(0, 200).replace(/\n/g, " "));
+
+    const ct = r.headers["content-type"] || "";
+    if (/text\/html/.test(ct)) {
+      // 本机能连到 GitHub：走到了「GitHub 拒 code」的握手分支
+      console.log("    （已连到 GitHub，检查错误握手页）");
+      check("含 authorizing:github 起始握手", /authorizing:github/.test(r.body));
+      check("含 authorization:github:error:", /authorization:github:error:/.test(r.body));
+      check("用 e.origin 回递（不用 *）", /postMessage\([^)]*e\.origin/.test(r.body));
+    } else {
+      // 本机连不到 GitHub（常见）：走 catch 分支返回 JSON 502，这是预期行为
+      console.log("    （本机连不到 github.com，走超时/网络错误分支 —— 属预期）");
+      check("网络不通时返回 JSON 502", r.code === 502 && /token_exchange_failed/.test(r.body), "code=" + r.code);
+    }
+    console.log("    返回体前 300 字: " + r.body.slice(0, 300).replace(/\n/g, " "));
+  }
+
+  console.log("\n========== 测试 6：握手页协议顺序（Decap 兼容性关键） ==========");
+  {
+    // 直接调函数内部逻辑：构造一个成功的握手页需要真 token，
+    // 这里改为静态检查成功分支的脚本模板是否满足协议三要素。
+    const fs = require("fs");
+    const src = fs.readFileSync(FN, "utf8");
+
+    check("先发 authorizing:github", /postMessage\('authorizing:github', '\*'\)/.test(src));
+    check("再监听 message 事件", /addEventListener\('message',\s*receive/.test(src));
+    check("success 消息用 authorization:github:success:", /authorization:github:success:/.test(src));
+    check("error 消息用 authorization:github:error:", /authorization:github:error:/.test(src));
+    check("成功后关闭 popup", /window\.close\(\)/.test(src));
+    check("payload 用 JSON.stringify 转义（防注入）", /JSON\.stringify\(jsonPayload\)/.test(src));
   }
 
   console.log("\n========== 汇总 ==========");

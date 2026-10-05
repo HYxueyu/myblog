@@ -137,41 +137,72 @@ export async function onRequest(context) {
   }
 
   if (data.error || !data.access_token) {
-    return json({ error: "token_exchange_failed", detail: data }, 400, origin);
+    return new Response(errorHandshake(data), {
+      status: 200,
+      headers: { "Content-Type": "text/html; charset=utf-8" },
+    });
   }
 
   // Decap 期望的载荷：{ token, provider }
-  const payload = JSON.stringify({ token: data.access_token, provider: "github" })
-    .replace(/\\/g, "\\\\")
-    .replace(/'/g, "\\'");
+  const payload = JSON.stringify({ token: data.access_token, provider: "github" });
 
-  // 用 postMessage 把 token 递回打开后台的窗口（Decap 标准握手）
-  const html = `<!DOCTYPE html>
-<html lang="zh-CN"><head><meta charset="utf-8"><title>登录中…</title></head>
-<body>
-<p style="font-family:-apple-system,'PingFang SC',sans-serif;color:#666;text-align:center;margin-top:80px">
-  登录成功，正在返回后台…
-</p>
-<script>
-  (function () {
-    var payload = '${payload}';
-    function send(targetOrigin) {
-      if (!window.opener) return;
-      window.opener.postMessage('authorization:github:success:' + payload, targetOrigin);
-    }
-    // Decap 会先发来握手消息，收到后回递 token
-    window.addEventListener('message', function (e) {
-      send(e.origin || '*');
-    }, false);
-    // 主动触发一次握手（防止握手消息早于本页面加载）
-    send('*');
-    setTimeout(function () { window.close(); }, 1200);
-  })();
-</script>
-</body></html>`;
-
-  return new Response(html, {
+  // 用 postMessage 把 token 递回打开后台的窗口（Decap 标准握手，顺序不能变）
+  return new Response(successHandshake(payload), {
     status: 200,
     headers: { "Content-Type": "text/html; charset=utf-8" },
   });
+}
+
+/**
+ * 成功握手页。
+ * 协议顺序（照抄 Decap 官方 + 各社区实现，顺序错会静默失败）：
+ *   1. 主动向父窗口发 "authorizing:github"（用 * 作为 targetOrigin）
+ *   2. 父窗口收到后会回一条消息（带它自己的 origin）
+ *   3. 收到回信后，才把 success 消息发回去，且 targetOrigin 用 e.origin
+ * 最后关闭 popup。
+ */
+function successHandshake(jsonPayload) {
+  // 内联进 JS 字符串前转义，防止 token 里的特殊字符破坏脚本
+  const safe = JSON.stringify(jsonPayload);
+  return `<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>登录成功</title></head>
+<body style="font-family:-apple-system,'PingFang SC',sans-serif;color:#666;text-align:center;margin-top:80px">
+正在返回后台…
+<script>
+(function () {
+  var payload = ${safe};
+  var message = 'authorization:github:success:' + payload;
+  function receive(e) {
+    // e.origin 是父窗口的来源，只回给它，避免 token 泄露
+    if (window.opener) window.opener.postMessage(message, e.origin || '*');
+    setTimeout(function () { window.close(); }, 400);
+  }
+  window.addEventListener('message', receive, false);
+  // 必须先发这条，父窗口才会进入等待状态
+  if (window.opener) window.opener.postMessage('authorizing:github', '*');
+})();
+</script>
+</body></html>`;
+}
+
+/** 失败握手页：按 Decap 协议把错误递回，让后台显示原因而不是干等 */
+function errorHandshake(detail) {
+  const safe = JSON.stringify(JSON.stringify({ error: detail.error || "oauth_error", error_description: detail.error_description || "" }));
+  return `<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8"><title>登录失败</title></head>
+<body style="font-family:-apple-system,'PingFang SC',sans-serif;color:#c00;text-align:center;margin-top:80px">
+登录失败，正在返回…
+<script>
+(function () {
+  var payload = ${safe};
+  var message = 'authorization:github:error:' + payload;
+  function receive(e) {
+    if (window.opener) window.opener.postMessage(message, e.origin || '*');
+    setTimeout(function () { window.close(); }, 400);
+  }
+  window.addEventListener('message', receive, false);
+  if (window.opener) window.opener.postMessage('authorizing:github', '*');
+})();
+</script>
+</body></html>`;
 }
