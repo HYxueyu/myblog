@@ -19,9 +19,41 @@ backend:
   #   但会让 state 参数失真，且本地 localhost 调试时也会走错分支。
   site_domain: blog.heiyunas.top
 
-# 媒体文件（封面图）存放位置
-media_folder: "posters"
-public_folder: "/posters"
+# ------------------------------------------------------------
+#  媒体库（Media）
+#  ★ 上传的图统一存到 uploads/，绝不与 posters/ 混在一起
+#    posters/ 里全是脚本刮削来的封面（steam-* / bgm-* / db-*），
+#    若 media_folder 指向 posters/，媒体库会把 70 张刮削图全列出来，
+#    而且上传的图会和它们混在一起，根本分不清。
+#
+#  ★ 想要「分相册」怎么办（Decap 原生限制，实测确认）
+#    Decap 的媒体库**不支持在界面里选目录、也不支持新建相册**：
+#      - media_library: 只能挂外部媒体库（uploadcare 之类），
+#        填别的名字会报 "Missing external media library"
+#      - media_folder 只能全局一个，字段级只在 markdown 编辑器里生效
+#    → 折中办法：文件名带前缀，用搜索框过滤。
+#      「搜索」框输入前缀即可筛出想要的那组图，例如：
+#        gallery_   相册页生活照
+#        cover_     条目封面
+#        blog_      文章配图
+#      上传后手动把文件名改成对应前缀（或上传前就改好）。
+#
+#  ★ 手动指定已有图片（刮削图）当封面：不用走媒体库。
+#    点封面字段右侧的「手动输入」/ 直接粘贴路径
+#      /posters/steam-1593500.jpg
+#    ★ 路径必须以 / 开头（站点根目录绝对路径）。
+#      这样 Decap 会原样使用，不会被 public_folder 重算，
+#      线上、子页面（/post.html）下都能正确加载。
+#
+#  ★ 条目列表看不到封面缩略图？
+#    Decap 的条目列表有两种视图，右上角可切换：
+#      - 列表视图（≡）：只显示文字标题
+#      - 网格视图（⊞ 九宫格）：显示封面缩略图  ← 想看封面请切这个
+#    「cover」字段名正好命中 Decap 的封面识别白名单
+#    （image / cover / poster / thumbnail ...），切到网格视图即会显示。
+# ------------------------------------------------------------
+media_folder: "uploads"
+public_folder: "/uploads"
 
 # 界面语言
 locale: zh_Hans
@@ -32,6 +64,12 @@ publish_mode: simple
 # 关闭每条内容的预览面板（我们的卡片样式复杂，预览意义不大）
 editor:
   preview: false
+
+# ★ 上传文件的命名规则：中文保留，空格换下划线，避免 URL 乱码
+slug:
+  encoding: "unicode"
+  clean_accents: false
+  sanitize_replacement: "_"
 
 collections:
   # ======================== 游戏墙 ========================
@@ -91,7 +129,7 @@ collections:
               - { label: "开发商 / 工作室", name: "author", widget: "string", required: false }
               - { label: "短评", name: "comment", widget: "text", required: false, hint: "一句话感想，会显示在详情弹窗里" }
               - { label: "长篇观后感", name: "review", widget: "markdown", required: false, hint: "留空则详情弹窗里不出现「阅读全文」按钮" }
-              - { label: "封面图", name: "cover", widget: "image", required: false, hint: "竖版海报最佳；上传后自动存到 posters/ 目录" }
+              - { label: "封面图", name: "cover", widget: "image", required: false, hint: "竖版海报最佳。自己上传的图会存到 uploads/；想复用刮削图，点「手动输入」粘 /posters/xxx.jpg 这类绝对路径" }
               - { label: "占位图标", name: "emoji", widget: "string", default: "🎮", required: false }
 
   # ======================== 阅读墙 ========================

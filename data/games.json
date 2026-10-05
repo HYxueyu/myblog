@@ -9,7 +9,7 @@
       "status": "playing",
       "progress": "27.1 小时 · 最近 2026-08",
       "rating": 0,
-      "cover": "posters/steam-1593500.jpg",
+      "cover": "/posters/steam-1593500.jpg",
       "emoji": "🎮"
     },
     {
@@ -20,7 +20,7 @@
       "status": "playing",
       "progress": "71.8 小时 · 最近 2026-07",
       "rating": 0,
-      "cover": "posters/steam-1850570.jpg",
+      "cover": "/posters/steam-1850570.jpg",
       "emoji": "🎮"
     },
     {
@@ -32,7 +32,7 @@
       "progress": "40 小时 · 最近 2026-06",
       "rating": 0,
       "comment": "第三章的黄风岭配乐封神。手残党在虎先锋面前卡了两晚上。",
-      "cover": "posters/steam-2358720.jpg",
+      "cover": "/posters/steam-2358720.jpg",
       "emoji": "🐒",
       "author": "游戏科学"
     },
@@ -44,7 +44,7 @@
       "status": "playing",
       "progress": "7.8 小时 · 最近 2026-06",
       "rating": 0,
-      "cover": "posters/steam-646570.jpg",
+      "cover": "/posters/steam-646570.jpg",
       "emoji": "🎮",
       "author": "Mega Crit Games"
     },
@@ -56,7 +56,7 @@
       "status": "playing",
       "progress": "80 小时 · 最近 2026-06",
       "rating": 0,
-      "cover": "posters/steam-431960.jpg",
+      "cover": "/posters/steam-431960.jpg",
       "emoji": "🎮",
       "author": "Kristjan Skutta"
     },
@@ -68,7 +68,7 @@
       "status": "playing",
       "progress": "4.4 小时 · 最近 2026-05",
       "rating": 0,
-      "cover": "posters/steam-993090.jpg",
+      "cover": "/posters/steam-993090.jpg",
       "emoji": "🎮"
     },
     {
@@ -79,7 +79,7 @@
       "status": "playing",
       "progress": "4.2 小时 · 最近 2026-05",
       "rating": 0,
-      "cover": "posters/bgm-game-503983.jpg",
+      "cover": "/posters/bgm-game-503983.jpg",
       "emoji": "🎮"
     },
     {
@@ -90,7 +90,7 @@
       "status": "playing",
       "progress": "18.3 小时 · 最近 2026-04",
       "rating": 0,
-      "cover": "posters/steam-2000950.jpg",
+      "cover": "/posters/steam-2000950.jpg",
       "emoji": "🎮"
     },
     {
@@ -101,7 +101,7 @@
       "status": "playing",
       "progress": "19.5 小时 · 最近 2026-04",
       "rating": 0,
-      "cover": "posters/steam-3321460.jpg",
+      "cover": "/posters/steam-3321460.jpg",
       "emoji": "🎮"
     },
     {
@@ -112,7 +112,7 @@
       "status": "playing",
       "progress": "3.9 小时 · 最近 2026-04",
       "rating": 0,
-      "cover": "posters/steam-262060.jpg",
+      "cover": "/posters/steam-262060.jpg",
       "emoji": "🎮",
       "author": "Red Hook Studios"
     },
@@ -124,7 +124,7 @@
       "status": "playing",
       "progress": "5.9 小时 · 最近 2026-04",
       "rating": 0,
-      "cover": "posters/steam-1144200.jpg",
+      "cover": "/posters/steam-1144200.jpg",
       "emoji": "🎮",
       "author": "VOID Interactive"
     },
@@ -136,7 +136,7 @@
       "status": "playing",
       "progress": "51.4 小时 · 最近 2026-03",
       "rating": 0,
-      "cover": "posters/steam-1426210.jpg",
+      "cover": "/posters/steam-1426210.jpg",
       "emoji": "🎮"
     },
     {
@@ -147,7 +147,7 @@
       "status": "playing",
       "progress": "21.3 小时 · 最近 2026-03",
       "rating": 0,
-      "cover": "posters/steam-883710.jpg",
+      "cover": "/posters/steam-883710.jpg",
       "emoji": "🎮",
       "author": "CAPCOM Co. Ltd."
     },
@@ -159,7 +159,7 @@
       "status": "playing",
       "progress": "7.3 小时 · 最近 2026-02",
       "rating": 0,
-      "cover": "posters/steam-1091500.jpg",
+      "cover": "/posters/steam-1091500.jpg",
       "emoji": "🎮"
     },
     {
@@ -170,7 +170,7 @@
       "status": "playing",
       "progress": "86.6 小时 · 最近 2026-01",
       "rating": 0,
-      "cover": "posters/steam-2909400.jpg",
+      "cover": "/posters/steam-2909400.jpg",
       "emoji": "🎮"
     },
     {
@@ -181,7 +181,7 @@
       "status": "playing",
       "progress": "3.4 小时 · 最近 2025-12",
       "rating": 0,
-      "cover": "posters/steam-1174180.jpg",
+      "cover": "/posters/steam-1174180.jpg",
       "emoji": "🎮",
       "author": "Rockstar Games"
     },
@@ -193,7 +193,7 @@
       "status": "playing",
       "progress": "16 小时 · 最近 2025-11",
       "rating": 0,
-      "cover": "posters/steam-1222140.jpg",
+      "cover": "/posters/steam-1222140.jpg",
       "emoji": "🎮",
       "author": "Quantic Dream (original release)"
     },
@@ -205,7 +205,7 @@
       "status": "playing",
       "progress": "1.5 小时 · 最近 2025-11",
       "rating": 0,
-      "cover": "posters/bgm-game-625842.jpg",
+      "cover": "/posters/bgm-game-625842.jpg",
       "emoji": "🎮",
       "author": "Konami"
     },
@@ -217,7 +217,7 @@
       "status": "playing",
       "progress": "2.1 小时 · 最近 2025-11",
       "rating": 0,
-      "cover": "posters/bgm-game-397705.jpg",
+      "cover": "/posters/bgm-game-397705.jpg",
       "emoji": "🎮"
     },
     {
@@ -228,7 +228,7 @@
       "status": "playing",
       "progress": "30.9 小时 · 最近 2025-10",
       "rating": 0,
-      "cover": "posters/steam-3419430.jpg",
+      "cover": "/posters/steam-3419430.jpg",
       "emoji": "🎮",
       "author": "Marcel Zurawka"
     },
@@ -240,7 +240,7 @@
       "status": "playing",
       "progress": "3.7 小时 · 最近 2025-10",
       "rating": 0,
-      "cover": "posters/steam-638970.jpg",
+      "cover": "/posters/steam-638970.jpg",
       "emoji": "🎮",
       "author": "Sega Studios Australia"
     },
@@ -252,7 +252,7 @@
       "status": "playing",
       "progress": "34.8 小时 · 最近 2025-09",
       "rating": 0,
-      "cover": "posters/steam-1687950.jpg",
+      "cover": "/posters/steam-1687950.jpg",
       "emoji": "🎮",
       "author": "Atlus"
     },
@@ -264,7 +264,7 @@
       "status": "playing",
       "progress": "7.9 小时 · 最近 2025-09",
       "rating": 0,
-      "cover": "posters/steam-3117820.jpg",
+      "cover": "/posters/steam-3117820.jpg",
       "emoji": "🎮",
       "author": "Double Cross"
     },
@@ -276,7 +276,7 @@
       "status": "playing",
       "progress": "14.8 小时 · 最近 2025-07",
       "rating": 0,
-      "cover": "posters/steam-2344520.jpg",
+      "cover": "/posters/steam-2344520.jpg",
       "emoji": "🎮",
       "author": "Blizzard Entertainment"
     },
@@ -288,7 +288,7 @@
       "status": "playing",
       "progress": "63.8 小时 · 最近 2025-07",
       "rating": 0,
-      "cover": "posters/steam-2515020.jpg",
+      "cover": "/posters/steam-2515020.jpg",
       "emoji": "🎮"
     },
     {
@@ -299,7 +299,7 @@
       "status": "playing",
       "progress": "1.6 小时 · 最近 2025-07",
       "rating": 0,
-      "cover": "posters/steam-292030.jpg",
+      "cover": "/posters/steam-292030.jpg",
       "emoji": "🎮"
     },
     {
@@ -310,7 +310,7 @@
       "status": "playing",
       "progress": "1.9 小时 · 最近 2025-06",
       "rating": 0,
-      "cover": "posters/steam-397540.jpg",
+      "cover": "/posters/steam-397540.jpg",
       "emoji": "🎮",
       "author": "Gearbox Software LLC"
     },
@@ -322,7 +322,7 @@
       "status": "playing",
       "progress": "5.3 小时 · 最近 2025-06",
       "rating": 0,
-      "cover": "posters/steam-1868140.jpg",
+      "cover": "/posters/steam-1868140.jpg",
       "emoji": "🎮",
       "author": "MINTROCKET"
     },
@@ -334,7 +334,7 @@
       "status": "playing",
       "progress": "4.7 小时 · 最近 2025-06",
       "rating": 0,
-      "cover": "posters/steam-412020.jpg",
+      "cover": "/posters/steam-412020.jpg",
       "emoji": "🎮"
     },
     {
@@ -345,7 +345,7 @@
       "status": "playing",
       "progress": "51.2 小时 · 最近 2025-05",
       "rating": 0,
-      "cover": "posters/steam-582010.jpg",
+      "cover": "/posters/steam-582010.jpg",
       "emoji": "🎮",
       "author": "CAPCOM Co. Ltd."
     },
@@ -357,7 +357,7 @@
       "status": "playing",
       "progress": "6.6 小时 · 最近 2025-02",
       "rating": 0,
-      "cover": "posters/bgm-game-490661.jpg",
+      "cover": "/posters/bgm-game-490661.jpg",
       "emoji": "🎮"
     },
     {
@@ -369,7 +369,7 @@
       "progress": "刚玩了几个任务",
       "rating": 0,
       "comment": "刚玩了几个任务，攻略已整理成文。",
-      "cover": "img/cover-zelda_w.jpg",
+      "cover": "/img/cover-zelda_w.jpg",
       "emoji": "🗺️",
       "review": "zelda-shrine-guide",
       "author": "任天堂"
@@ -383,7 +383,7 @@
       "progress": "166.4 小时 · 最近 2026-08",
       "rating": 5,
       "comment": "年度游戏没有悬念。队友全员立体的 CRPG 天花板，二周目排队中。",
-      "cover": "posters/steam-1086940.jpg",
+      "cover": "/posters/steam-1086940.jpg",
       "emoji": "🎲",
       "author": "Larian Studios"
     },
@@ -396,7 +396,7 @@
       "progress": "30.3 小时 · 最近 2025-10",
       "rating": 4.5,
       "comment": "电子布洛芬。压力大的时候回去种两天地，什么都好了。",
-      "cover": "posters/steam-413150.jpg",
+      "cover": "/posters/steam-413150.jpg",
       "emoji": "🌾",
       "author": "ConcernedApe"
     },
@@ -408,7 +408,7 @@
       "status": "wish",
       "progress": "0.6 小时 · 最近 2026-06",
       "rating": 0,
-      "cover": "posters/steam-2384580.jpg",
+      "cover": "/posters/steam-2384580.jpg",
       "emoji": "🎮",
       "author": "KOEI TECMO GAMES CO."
     },
@@ -420,7 +420,7 @@
       "status": "wish",
       "progress": "最近 2026-05",
       "rating": 0,
-      "cover": "posters/bgm-game-374638.jpg",
+      "cover": "/posters/bgm-game-374638.jpg",
       "emoji": "🎮"
     },
     {
@@ -431,7 +431,7 @@
       "status": "wish",
       "progress": "0.8 小时 · 最近 2026-04",
       "rating": 0,
-      "cover": "posters/steam-1812620.jpg",
+      "cover": "/posters/steam-1812620.jpg",
       "emoji": "🎮",
       "author": "Paliverse"
     },
@@ -443,7 +443,7 @@
       "status": "wish",
       "progress": "0.6 小时 · 最近 2026-02",
       "rating": 0,
-      "cover": "posters/steam-616720.jpg",
+      "cover": "/posters/steam-616720.jpg",
       "emoji": "🎮"
     },
     {
@@ -454,7 +454,7 @@
       "status": "wish",
       "progress": "0.8 小时 · 最近 2025-10",
       "rating": 0,
-      "cover": "posters/steam-2561580.jpg",
+      "cover": "/posters/steam-2561580.jpg",
       "emoji": "🎮",
       "author": "guerrilla games"
     },
@@ -466,7 +466,7 @@
       "status": "wish",
       "progress": "0.2 小时 · 最近 2025-10",
       "rating": 0,
-      "cover": "posters/steam-4989790.jpg",
+      "cover": "/posters/steam-4989790.jpg",
       "emoji": "🎮"
     },
     {
@@ -477,7 +477,7 @@
       "status": "wish",
       "progress": "0.9 小时 · 最近 2025-09",
       "rating": 0,
-      "cover": "posters/steam-2507950.jpg",
+      "cover": "/posters/steam-2507950.jpg",
       "emoji": "🎮"
     },
     {
@@ -488,7 +488,7 @@
       "status": "wish",
       "progress": "最近 2025-09",
       "rating": 0,
-      "cover": "posters/bgm-game-385208.jpg",
+      "cover": "/posters/bgm-game-385208.jpg",
       "emoji": "🎮"
     },
     {
@@ -499,7 +499,7 @@
       "status": "wish",
       "progress": "0.2 小时 · 最近 2025-09",
       "rating": 0,
-      "cover": "posters/bgm-game-380974.jpg",
+      "cover": "/posters/bgm-game-380974.jpg",
       "emoji": "🎮"
     },
     {
@@ -510,7 +510,7 @@
       "status": "wish",
       "progress": "0.1 小时 · 最近 2025-07",
       "rating": 0,
-      "cover": "posters/steam-1659420.jpg",
+      "cover": "/posters/steam-1659420.jpg",
       "emoji": "🎮"
     },
     {
@@ -521,7 +521,7 @@
       "status": "wish",
       "progress": "0.4 小时 · 最近 2025-05",
       "rating": 0,
-      "cover": "posters/steam-3240220.jpg",
+      "cover": "/posters/steam-3240220.jpg",
       "emoji": "🎮",
       "author": "rockstar north"
     },
@@ -533,7 +533,7 @@
       "status": "wish",
       "progress": "0.4 小时 · 最近 2024-12",
       "rating": 0,
-      "cover": "posters/steam-1888930.jpg",
+      "cover": "/posters/steam-1888930.jpg",
       "emoji": "🎮"
     },
     {
@@ -544,7 +544,7 @@
       "status": "wish",
       "rating": 0,
       "comment": "本体还没打通，DLC 先囤着。",
-      "cover": "posters/bgm-game-284100.jpg",
+      "cover": "/posters/bgm-game-284100.jpg",
       "emoji": "🗡️",
       "author": "FromSoftware"
     }

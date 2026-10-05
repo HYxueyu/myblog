@@ -38,8 +38,9 @@ ok &= need(!!(doc.backend && doc.backend.base_url), "backend.base_url = " + (doc
 ok &= need(!!(doc.backend && doc.backend.auth_endpoint), "backend.auth_endpoint = " + (doc.backend && doc.backend.auth_endpoint));
 
 console.log("\n=== 全局 ===");
-ok &= need(doc.media_folder === "posters", "media_folder = " + doc.media_folder);
-ok &= need(doc.public_folder === "/posters", "public_folder = " + doc.public_folder);
+// uploads/ = 自己上传的图；posters/ = 脚本刮削的封面，两者必须隔离
+ok &= need(doc.media_folder === "uploads", "media_folder = " + doc.media_folder + " (期望 uploads)");
+ok &= need(doc.public_folder === "/uploads", "public_folder = " + doc.public_folder + " (期望 /uploads)");
 ok &= need(doc.locale === "zh_Hans", "locale = " + doc.locale);
 ok &= need(doc.publish_mode === "simple", "publish_mode = " + doc.publish_mode);
 
