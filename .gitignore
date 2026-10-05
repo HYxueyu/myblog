@@ -28,3 +28,11 @@ desktop.ini
 # 提交信息草稿
 tools/_commitmsg.txt
 tools/_*.js
+
+# 构建产物
+publish/
+site/
+
+public/
+db.json
+

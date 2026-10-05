@@ -86,6 +86,7 @@ function postCardHTML(post) {
         '<div class="post-meta"><span class="cat">' + post.category + "</span>" + formatDate(post.date) + "</div>" +
         "<h3>" + post.title + "</h3>" +
         "<p>" + post.summary + "</p>" +
+        '<div class="card-foot"><span>' + post.category + '</span><span class="read-more">阅读全文 →</span></div>' +
       "</div>" +
     "</a>";
 }
