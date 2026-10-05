@@ -55,8 +55,10 @@
         <h2>阅读墙</h2>
       </div>
       <p style="color:var(--ink-soft);font-size:15px;margin-bottom:8px">
-        我的书与漫画记录。封面墙按「正在读 / 已读完 / 想读」分组，在读的带进度条，读完的带评分和一句话感想。
+        我的书与漫画记录。封面墙按「正在读 / 已读完 / 想读」分组，在读的带进度条，读完的带评分和一句话感想。<strong>点任意卡片看详情。</strong>
       </p>
+      <!-- 筛选条（由 js/main.js 按数据自动生成：类型 / 状态） -->
+      <nav class="platform-filter" id="reading-filter" aria-label="按类型和状态筛选"></nav>
       <!-- 数据在 js/library.js 的 READING 数组中维护：
            更新进度、加书、补海报封面都可以直接改数据或告诉墨鸦 -->
       <div id="reading-shelf"></div>

@@ -294,62 +294,8 @@ const READING = [
 ];
 
 const MOVIES = [
-  {
-    title: "沙丘 2",
-    type: "电影",
-    author: "丹尼斯·维伦纽瓦",
-    status: "done",
-    progress: "",
-    rating: 4.5,
-    comment: "IMAX 影院看的，沙虫出场那一段值回票价。",
-    cover: "",
-    emoji: "🏜️",
-  },
-  {
-    title: "漫长的季节",
-    type: "剧集",
-    author: "辛爽",
-    status: "done",
-    progress: "全 12 集",
-    rating: 5,
-    comment: "「往前看，别回头。」年度最佳，没有之一。",
-    cover: "",
-    emoji: "🌽",
-    review: "changan-season-review",
-  },
-  {
-    title: "良医",
-    type: "剧集",
-    author: "",
-    status: "reading",
-    progress: "S2E05",
-    rating: 0,
-    comment: "医疗剧下饭神器，就是节奏有点拖。",
-    cover: "",
-    emoji: "🏥",
-  },
-  {
-    title: "你的名字。",
-    type: "电影",
-    author: "新海诚",
-    status: "done",
-    progress: "",
-    rating: 4,
-    comment: "隔了五年二刷，红绳的伏笔这次才看全。",
-    cover: "",
-    emoji: "☄️",
-  },
-  {
-    title: "奥本海默",
-    type: "电影",
-    author: "克里斯托弗·诺兰",
-    status: "wish",
-    progress: "",
-    rating: 0,
-    comment: "一直没找到三个小时的完整时间。",
-    cover: "",
-    emoji: "☢️",
-  },
+  /* 影视记录暂空（黑羽 2026-10-05 确认旧 5 条都没看过，已清空）
+     —— 之后用「片名 + 看到哪 + 评分」即可补录，墨鸦会自动抓海报 */
 ];
 
 /* ============================================================
@@ -364,6 +310,7 @@ const GAMES = [
   {
     title: "God of War",
     type: "游戏",
+    genre: "动作冒险",
     platform: "PS4",
     status: "playing",
     progress: "27.1 小时 · 最近 2026-08",
@@ -374,6 +321,7 @@ const GAMES = [
   {
     title: "DEATH STRANDING DIRECTOR'S CUT",
     type: "游戏",
+    genre: "动作冒险",
     platform: "PS5",
     status: "playing",
     progress: "71.8 小时 · 最近 2026-07",
@@ -384,6 +332,7 @@ const GAMES = [
   {
     title: "黑神话：悟空",
     type: "游戏",
+    genre: "角色扮演",
     author: "游戏科学",
     platform: "PS5",
     status: "playing",
@@ -396,6 +345,7 @@ const GAMES = [
   {
     title: "Slay the Spire",
     type: "游戏",
+    genre: "策略经营",
     author: "Mega Crit Games",
     platform: "Steam",
     status: "playing",
@@ -407,6 +357,7 @@ const GAMES = [
   {
     title: "Wallpaper Engine",
     type: "游戏",
+    genre: "工具",
     author: "Kristjan Skutta",
     platform: "Steam",
     status: "playing",
@@ -418,6 +369,7 @@ const GAMES = [
   {
     title: "Lossless Scaling",
     type: "游戏",
+    genre: "工具",
     platform: "Steam",
     status: "playing",
     progress: "4.4 小时 · 最近 2026-05",
@@ -428,6 +380,7 @@ const GAMES = [
   {
     title: "Neverness to Everness",
     type: "游戏",
+    genre: "角色扮演",
     platform: "PS5",
     status: "playing",
     progress: "4.2 小时 · 最近 2026-05",
@@ -438,6 +391,7 @@ const GAMES = [
   {
     title: "Call of Duty Modern Warfare",
     type: "游戏",
+    genre: "射击",
     platform: "PS4",
     status: "playing",
     progress: "18.3 小时 · 最近 2026-04",
@@ -448,6 +402,7 @@ const GAMES = [
   {
     title: "Crimson Desert Enhanced",
     type: "游戏",
+    genre: "动作冒险",
     platform: "Steam",
     status: "playing",
     progress: "19.5 小时 · 最近 2026-04",
@@ -458,6 +413,7 @@ const GAMES = [
   {
     title: "Darkest Dungeon",
     type: "游戏",
+    genre: "角色扮演",
     author: "Red Hook Studios",
     platform: "Steam",
     status: "playing",
@@ -469,6 +425,7 @@ const GAMES = [
   {
     title: "Ready or Not",
     type: "游戏",
+    genre: "射击",
     author: "VOID Interactive",
     platform: "Steam",
     status: "playing",
@@ -480,6 +437,7 @@ const GAMES = [
   {
     title: "It Takes Two",
     type: "游戏",
+    genre: "独立游戏",
     platform: "PS5",
     status: "playing",
     progress: "51.4 小时 · 最近 2026-03",
@@ -490,6 +448,7 @@ const GAMES = [
   {
     title: "Resident Evil 2",
     type: "游戏",
+    genre: "恐怖",
     author: "CAPCOM Co. Ltd.",
     platform: "Steam",
     status: "playing",
@@ -501,6 +460,7 @@ const GAMES = [
   {
     title: "Cyberpunk 2077",
     type: "游戏",
+    genre: "角色扮演",
     platform: "PS5",
     status: "playing",
     progress: "7.3 小时 · 最近 2026-02",
@@ -511,6 +471,7 @@ const GAMES = [
   {
     title: "FINAL FANTASY VII REBIRTH",
     type: "游戏",
+    genre: "角色扮演",
     platform: "PS5",
     status: "playing",
     progress: "86.6 小时 · 最近 2026-01",
@@ -521,6 +482,7 @@ const GAMES = [
   {
     title: "Red Dead Redemption 2",
     type: "游戏",
+    genre: "动作冒险",
     author: "Rockstar Games",
     platform: "Steam",
     status: "playing",
@@ -532,6 +494,7 @@ const GAMES = [
   {
     title: "Detroit: Become Human",
     type: "游戏",
+    genre: "动作冒险",
     author: "Quantic Dream (original release)",
     platform: "Steam",
     status: "playing",
@@ -543,6 +506,7 @@ const GAMES = [
   {
     title: "eFootball",
     type: "游戏",
+    genre: "体育竞技",
     author: "Konami",
     platform: "PS5",
     status: "playing",
@@ -554,6 +518,7 @@ const GAMES = [
   {
     title: "Where Winds Meet",
     type: "游戏",
+    genre: "角色扮演",
     platform: "PS5",
     status: "playing",
     progress: "2.1 小时 · 最近 2025-11",
@@ -564,6 +529,7 @@ const GAMES = [
   {
     title: "Bongo Cat",
     type: "游戏",
+    genre: "独立游戏",
     author: "Marcel Zurawka",
     platform: "Steam",
     status: "playing",
@@ -575,6 +541,7 @@ const GAMES = [
   {
     title: "Yakuza 0",
     type: "游戏",
+    genre: "动作冒险",
     author: "Sega Studios Australia",
     platform: "Steam",
     status: "playing",
@@ -586,6 +553,7 @@ const GAMES = [
   {
     title: "Persona 5 Royal",
     type: "游戏",
+    genre: "角色扮演",
     author: "Atlus",
     platform: "Steam",
     status: "playing",
@@ -597,6 +565,7 @@ const GAMES = [
   {
     title: "Sultan's Game",
     type: "游戏",
+    genre: "策略经营",
     author: "Double Cross",
     platform: "Steam",
     status: "playing",
@@ -608,6 +577,7 @@ const GAMES = [
   {
     title: "空の軌跡 the 1st Demo",
     type: "游戏",
+    genre: "角色扮演",
     platform: "Steam",
     status: "playing",
     progress: "1 小时 · 最近 2025-08",
@@ -618,6 +588,7 @@ const GAMES = [
   {
     title: "Diablo IV",
     type: "游戏",
+    genre: "角色扮演",
     author: "Blizzard Entertainment",
     platform: "Steam",
     status: "playing",
@@ -629,6 +600,7 @@ const GAMES = [
   {
     title: "FINAL FANTASY XVI",
     type: "游戏",
+    genre: "角色扮演",
     platform: "PS5",
     status: "playing",
     progress: "63.8 小时 · 最近 2025-07",
@@ -639,6 +611,7 @@ const GAMES = [
   {
     title: "The Witcher 3: Wild Hunt",
     type: "游戏",
+    genre: "角色扮演",
     platform: "PS5",
     status: "playing",
     progress: "1.6 小时 · 最近 2025-07",
@@ -649,6 +622,7 @@ const GAMES = [
   {
     title: "Borderlands 3",
     type: "游戏",
+    genre: "射击",
     author: "Gearbox Software LLC",
     platform: "PS5",
     status: "playing",
@@ -660,6 +634,7 @@ const GAMES = [
   {
     title: "DAVE THE DIVER",
     type: "游戏",
+    genre: "策略经营",
     author: "MINTROCKET",
     platform: "Steam",
     status: "playing",
@@ -671,6 +646,7 @@ const GAMES = [
   {
     title: "Metro Exodus",
     type: "游戏",
+    genre: "射击",
     platform: "PS5",
     status: "playing",
     progress: "4.7 小时 · 最近 2025-06",
@@ -681,6 +657,7 @@ const GAMES = [
   {
     title: "Monster Hunter: World",
     type: "游戏",
+    genre: "动作冒险",
     author: "CAPCOM Co. Ltd.",
     platform: "Steam",
     status: "playing",
@@ -692,6 +669,7 @@ const GAMES = [
   {
     title: "The Last of Us Remastered",
     type: "游戏",
+    genre: "动作冒险",
     platform: "PS4",
     status: "playing",
     progress: "6.6 小时 · 最近 2025-02",
@@ -702,6 +680,7 @@ const GAMES = [
   {
     title: "塞尔达传说：王国之泪",
     type: "游戏",
+    genre: "动作冒险",
     author: "任天堂",
     platform: "Switch",
     status: "playing",
@@ -715,6 +694,7 @@ const GAMES = [
   {
     title: "博德之门 3",
     type: "游戏",
+    genre: "角色扮演",
     author: "Larian Studios",
     platform: "Steam",
     status: "done",
@@ -727,6 +707,7 @@ const GAMES = [
   {
     title: "星露谷物语",
     type: "游戏",
+    genre: "策略经营",
     author: "ConcernedApe",
     platform: "Steam",
     status: "done",
@@ -739,6 +720,7 @@ const GAMES = [
   {
     title: "DYNASTY WARRIORS: ORIGINS",
     type: "游戏",
+    genre: "动作冒险",
     author: "KOEI TECMO GAMES CO.",
     platform: "Steam",
     status: "wish",
@@ -750,6 +732,7 @@ const GAMES = [
   {
     title: "Arknights: Endfield",
     type: "游戏",
+    genre: "角色扮演",
     platform: "PS5",
     status: "wish",
     progress: "最近 2026-05",
@@ -760,6 +743,7 @@ const GAMES = [
   {
     title: "DSX",
     type: "游戏",
+    genre: "工具",
     author: "Paliverse",
     platform: "Steam",
     status: "wish",
@@ -771,6 +755,7 @@ const GAMES = [
   {
     title: "Live2DViewerEX",
     type: "游戏",
+    genre: "工具",
     platform: "Steam",
     status: "wish",
     progress: "0.6 小时 · 最近 2026-02",
@@ -781,6 +766,7 @@ const GAMES = [
   {
     title: "足球经理 26（试玩版）",
     type: "游戏",
+    genre: "策略经营",
     author: "Sports Interactive",
     platform: "Steam",
     status: "wish",
@@ -792,6 +778,7 @@ const GAMES = [
   {
     title: "Horizon Zero Dawn Remastered",
     type: "游戏",
+    genre: "动作冒险",
     author: "guerrilla games",
     platform: "Steam",
     status: "wish",
@@ -803,6 +790,7 @@ const GAMES = [
   {
     title: "Spacewar",
     type: "游戏",
+    genre: "工具",
     platform: "Steam",
     status: "wish",
     progress: "0.2 小时 · 最近 2025-10",
@@ -813,6 +801,7 @@ const GAMES = [
   {
     title: "Delta Force",
     type: "游戏",
+    genre: "射击",
     platform: "PS5",
     status: "wish",
     progress: "0.9 小时 · 最近 2025-09",
@@ -823,6 +812,7 @@ const GAMES = [
   {
     title: "Wuthering Waves",
     type: "游戏",
+    genre: "角色扮演",
     platform: "PS5",
     status: "wish",
     progress: "最近 2025-09",
@@ -833,6 +823,7 @@ const GAMES = [
   {
     title: "Zenless Zone Zero",
     type: "游戏",
+    genre: "角色扮演",
     platform: "PS5",
     status: "wish",
     progress: "0.2 小时 · 最近 2025-09",
@@ -843,6 +834,7 @@ const GAMES = [
   {
     title: "Uncharted 4: A Thief’s End",
     type: "游戏",
+    genre: "动作冒险",
     platform: "PS4",
     status: "wish",
     progress: "0.1 小时 · 最近 2025-07",
@@ -853,6 +845,7 @@ const GAMES = [
   {
     title: "Grand Theft Auto V Enhanced",
     type: "游戏",
+    genre: "动作冒险",
     author: "rockstar north",
     platform: "Steam",
     status: "wish",
@@ -864,6 +857,7 @@ const GAMES = [
   {
     title: "The Last of Us Part I",
     type: "游戏",
+    genre: "动作冒险",
     platform: "PS5",
     status: "wish",
     progress: "0.4 小时 · 最近 2024-12",
@@ -874,6 +868,7 @@ const GAMES = [
   {
     title: "Call of Duty",
     type: "游戏",
+    genre: "射击",
     platform: "PS5",
     status: "wish",
     progress: "最近 2024-08",
@@ -884,6 +879,7 @@ const GAMES = [
   {
     title: "艾尔登法环：黄金树幽影",
     type: "游戏",
+    genre: "角色扮演",
     author: "FromSoftware",
     platform: "PS5",
     status: "wish",

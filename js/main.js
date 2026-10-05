@@ -103,6 +103,7 @@ function renderPosts(container, list) {
 /* ---------- 阅读墙 & 影视墙渲染 ---------- */
 
 // 状态标签配置：key → 显示文字 + 样式类名
+// done 的文字按墙类区分（见 SHELF_LABELS），这里只给默认值（阅读墙）
 const SHELF_STATUS = {
   reading: { label: "在读", cls: "badge-reading" },
   watching: { label: "在看", cls: "badge-reading" },
@@ -112,11 +113,19 @@ const SHELF_STATUS = {
 };
 
 // 各类墙的分组标题：ing=进行中 / done=已完成 / wish=计划中
+// doneOne/wishOne = 单条状态角标用的说法
 const SHELF_LABELS = {
-  reading: { ing: "正在读", done: "已读完", wish: "想读清单" },
-  film:    { ing: "在看",   done: "已看完", wish: "想看片单" },
-  game:    { ing: "在玩",   done: "已通关", wish: "愿望单" },
+  reading: { ing: "正在读", done: "已读完", wish: "想读清单", doneOne: "已读完", wishOne: "想读" },
+  film:    { ing: "在看",   done: "已看完", wish: "想看片单", doneOne: "已看完", wishOne: "想看" },
+  game:    { ing: "在玩",   done: "已通关", wish: "愿望单",   doneOne: "已通关", wishOne: "想玩" },
 };
+
+// 按墙类取某状态条的显示文字
+function statusLabel(key, labels) {
+  if (key === "done") return (labels && labels.doneOne) || SHELF_STATUS.done.label;
+  if (key === "wish") return (labels && labels.wishOne) || SHELF_STATUS.wish.label;
+  return (SHELF_STATUS[key] && SHELF_STATUS[key].label) || "";
+}
 
 // 生成星级 HTML（支持 0.5 分，用半星表示）
 function starsHTML(rating) {
@@ -154,8 +163,9 @@ function posterHTML(item, emojiFallback) {
     '<span class="shelf-cover-title">' + item.title + "</span></div>";
 }
 
-// 生成一个条目卡片（阅读墙与影视墙共用结构）
-function shelfCardHTML(item, defaultEmoji) {
+// 生成一个条目卡片（阅读墙 / 影视墙 / 游戏墙共用结构）
+// 整张卡片可点击，点击后弹出详情浮层（见 openShelfDetail）
+function shelfCardHTML(item, defaultEmoji, labels) {
   let extra = "";
 
   // 在玩/在看/在读：显示进度（游戏与阅读用百分比条，剧集用文字进度）
@@ -175,12 +185,16 @@ function shelfCardHTML(item, defaultEmoji) {
 
   // 状态标签（想读/想看/想玩不显示进度）
   const st = SHELF_STATUS[item.status] || SHELF_STATUS.wish;
+  const stText = statusLabel(item.status, labels) || st.label;
 
-  return '<article class="shelf-card" data-platform="' + (item.platform || "") + '">' +
+  // data-idx 指向 all 数组下标，供点击弹窗取原始数据
+  return '<article class="shelf-card" data-platform="' + (item.platform || "") +
+    '" data-idx="' + item.__idx + '" tabindex="0" role="button" aria-label="查看《' + item.title + '》详情">' +
     '<div class="shelf-cover-wrap">' +
       posterHTML(item, defaultEmoji) +
-      '<span class="shelf-badge ' + st.cls + '">' + st.label + "</span>" +
+      '<span class="shelf-badge ' + st.cls + '">' + stText + "</span>" +
       (item.platform ? '<span class="shelf-platform">' + item.platform + "</span>" : "") +
+      (item.review ? '<span class="shelf-has-review" title="有长篇观后感">📝</span>' : "") +
     "</div>" +
     '<div class="shelf-info">' +
       "<h3>" + item.title + "</h3>" +
@@ -190,14 +204,86 @@ function shelfCardHTML(item, defaultEmoji) {
       starsHTML(item.rating) +
       extra +
       (item.comment ? '<p class="shelf-comment">' + item.comment + "</p>" : "") +
-      // 长篇观后感：跳转到独立博文
-      (item.review ? '<a class="shelf-review-link" href="post.html?id=' + item.review + '">→ 全文观后感</a>' : "") +
     "</div>" +
   "</article>";
 }
 
+/* ---------- 条目详情弹窗 ---------- */
+// 点击卡片弹出：大封面 + 完整信息 + 长篇观后感跳转（若有）
+function ensureShelfModal() {
+  let m = document.getElementById("shelf-modal");
+  if (m) return m;
+  m = document.createElement("div");
+  m.id = "shelf-modal";
+  m.className = "shelf-modal";
+  m.innerHTML =
+    '<div class="shelf-modal-mask"></div>' +
+    '<div class="shelf-modal-box" role="dialog" aria-modal="true">' +
+      '<button class="shelf-modal-close" aria-label="关闭">✕</button>' +
+      '<div class="shelf-modal-body"></div>' +
+    "</div>";
+  document.body.appendChild(m);
+
+  m.querySelector(".shelf-modal-mask").addEventListener("click", closeShelfModal);
+  m.querySelector(".shelf-modal-close").addEventListener("click", closeShelfModal);
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape") closeShelfModal();
+  });
+  return m;
+}
+
+function closeShelfModal() {
+  const m = document.getElementById("shelf-modal");
+  if (m) m.classList.remove("open");
+  document.body.classList.remove("modal-open");
+}
+
+function openShelfDetail(item, defaultEmoji, labels) {
+  if (!item) return;
+  const m = ensureShelfModal();
+  const c = coverOf(item);
+  const st = SHELF_STATUS[item.status] || SHELF_STATUS.wish;
+
+  let metaRows = "";
+  function row(k, v) {
+    if (!v) return;
+    metaRows += '<div class="sm-row"><span class="sm-k">' + k + '</span><span class="sm-v">' + v + "</span></div>";
+  }
+  row("类型", item.genre ? item.type + " · " + item.genre : item.type);
+  row("作者 / 制作", item.author);
+  row("平台", item.platform);
+  row("状态", statusLabel(item.status, labels) || st.label);
+  row("进度", item.progress !== undefined && item.progress !== 0 ? String(item.progress) : "");
+  row("评分", item.rating ? item.rating + " / 5　" + starsHTML(item.rating).replace(/<[^>]+>/g, "") : "");
+
+  const coverHTML = c && c.src
+    ? '<div class="sm-cover' + (c.banner ? " is-wide" : "") + '"><img src="' + c.src + '" alt="' + item.title + '"></div>'
+    : '<div class="sm-cover ph"><span>' + (item.emoji || defaultEmoji) + "</span></div>";
+
+  m.querySelector(".shelf-modal-body").innerHTML =
+    '<div class="sm-grid">' +
+      coverHTML +
+      '<div class="sm-info">' +
+        '<h3 class="sm-title">' + item.title + "</h3>" +
+        '<div class="sm-meta">' + metaRows + "</div>" +
+        (item.comment ? '<p class="sm-comment">' + item.comment + "</p>" : "") +
+        (item.review
+          ? '<a class="sm-review-btn" href="post.html?id=' + item.review + '">📝 阅读全文观后感</a>'
+          : "") +
+      "</div>" +
+    "</div>";
+
+  m.classList.add("open");
+  document.body.classList.add("modal-open");
+}
+
 // 把条目按状态分组渲染：进行中 / 已完成 / 计划中
-// opts: { container, filterEl, collapseWish, collapseAt }
+// opts: {
+//   filterEl,       筛选条容器
+//   filters,        筛选维度 [{ key, label, pick(item) }]，第一个自动加「全部」
+//   pageSize,       每页条数（0 = 不分页）
+//   collapseWish, collapseAt   愿望单/计划中超过 N 条折叠
+// }
 function renderShelf(container, items, defaultEmoji, labels, opts) {
   if (!container) return;
   labels = labels || SHELF_LABELS.reading;
@@ -210,76 +296,152 @@ function renderShelf(container, items, defaultEmoji, labels, opts) {
     { key: "wish", heading: labels.wish },
   ];
 
-  // 当前选中的平台（游戏墙用）
-  let activePlatform = opts.platform || "";
+  // 给每条打上下标，供弹窗回查原始数据
+  const all = items.map(function (it, i) {
+    const o = Object.create(it);
+    o.__idx = i;
+    return o;
+  });
+
+  // 当前筛选状态：{ 维度key: 选中值 }
+  const active = {};
+  let page = 1;
+  const pageSize = opts.pageSize || 0;
+
   const filterEl = opts.filterEl;
 
+  function visible() {
+    let list = all;
+    (opts.filters || []).forEach(function (f) {
+      const v = active[f.key];
+      if (v) list = list.filter(function (it) { return f.pick(it) === v; });
+    });
+    return list;
+  }
+
+  // 渲染筛选条（多个维度分行显示）
+  function paintFilters() {
+    if (!filterEl) return;
+    let html = "";
+    (opts.filters || []).forEach(function (f) {
+      // 统计每个取值出现次数
+      const count = {};
+      all.forEach(function (it) {
+        const v = f.pick(it);
+        if (v) count[v] = (count[v] || 0) + 1;
+      });
+      // 只保留出现 ≥2 次的选项（只占 1 条的孤例进筛选条没意义，仍可从「全部」看到）
+      const vals = Object.keys(count).filter(function (v) { return count[v] >= 2; });
+      if (vals.length < 2) return;   // 可筛选项不足 2 个，整个维度不显示
+      html += '<div class="filter-row"><span class="filter-row-label">' + f.label + "</span>" +
+        '<button class="platform-pill' + (!active[f.key] ? " is-on" : "") +
+          '" data-fk="' + f.key + '" data-fv="">全部<span class="pill-count">' + all.length + "</span></button>" +
+        vals.map(function (v) {
+          return '<button class="platform-pill' + (active[f.key] === v ? " is-on" : "") +
+            '" data-fk="' + f.key + '" data-fv="' + v + '">' + v +
+            '<span class="pill-count">' + count[v] + "</span></button>";
+        }).join("") + "</div>";
+    });
+    filterEl.innerHTML = html;
+
+    filterEl.querySelectorAll(".platform-pill").forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        const fk = btn.getAttribute("data-fk");
+        const fv = btn.getAttribute("data-fv");
+        // 同维度单选：先清掉该维度的选中态
+        filterEl.querySelectorAll('.platform-pill[data-fk="' + fk + '"]').forEach(function (b) {
+          b.classList.remove("is-on");
+        });
+        btn.classList.add("is-on");
+        if (fv) active[fk] = fv; else delete active[fk];
+        page = 1;
+        paint();
+      });
+    });
+  }
+
   function paint() {
-    const list = activePlatform
-      ? items.filter(function (it) { return (it.platform || "") === activePlatform; })
-      : items;
+    const list = visible();
+
+    // 分页切片（在分组前切，保证翻页连续）
+    let shownList = list;
+    let totalPages = 1;
+    if (pageSize > 0) {
+      totalPages = Math.max(1, Math.ceil(list.length / pageSize));
+      if (page > totalPages) page = totalPages;
+      shownList = list.slice((page - 1) * pageSize, page * pageSize);
+    }
+
     let html = "";
     groups.forEach(function (g) {
-      const sub = list.filter(function (it) { return it.status === g.key; });
-      if (sub.length === 0) return;
-      const collapse = opts.collapseWish && g.key === "wish" && sub.length > (opts.collapseAt || 8);
-      const shown = collapse ? sub.slice(0, opts.collapseAt || 8) : sub;
-      html += '<h2 class="shelf-group-title">' + g.heading + "（" + sub.length + "）</h2>";
+      // 分组标题显示「筛选后的总数」，卡片只渲染本页的
+      const total = list.filter(function (it) { return it.status === g.key; });
+      const sub = shownList.filter(function (it) { return it.status === g.key; });
+      if (total.length === 0) return;
+      const more = pageSize > 0 && total.length > sub.length;
+      // 只有不分页时才做折叠
+      const collapse = pageSize === 0 && opts.collapseWish && g.key === "wish" && total.length > (opts.collapseAt || 8);
+      const shown = collapse ? total.slice(0, opts.collapseAt || 8) : sub;
+      html += '<h2 class="shelf-group-title">' + g.heading + "（" + total.length + "）" +
+        (more ? '<span class="shelf-group-note">本页 ' + sub.length + "</span>" : "") + "</h2>";
       html += '<div class="shelf-grid" data-group="' + g.key + '">' +
-        shown.map(function (it) { return shelfCardHTML(it, defaultEmoji); }).join("") +
+        shown.map(function (it) { return shelfCardHTML(it, defaultEmoji, labels); }).join("") +
         "</div>";
       if (collapse) {
         html += '<button class="shelf-group-more" data-group="' + g.key + '">展开剩余 ' +
-          (sub.length - shown.length) + " 条 ▾</button>";
+          (total.length - shown.length) + " 条 ▾</button>";
       }
     });
+
+    // 分页控件
+    if (pageSize > 0 && totalPages > 1) {
+      html += '<div class="shelf-pager">' +
+        '<button class="pager-btn" data-pg="prev"' + (page <= 1 ? " disabled" : "") + ">‹ 上一页</button>" +
+        '<span class="pager-info">' + page + " / " + totalPages + " 页 · 共 " + list.length + " 条</span>" +
+        '<button class="pager-btn" data-pg="next"' + (page >= totalPages ? " disabled" : "") + ">下一页 ›</button>" +
+        "</div>";
+    }
+
     container.innerHTML = html || '<p class="empty-tip">这里还空着，第一条记录正在路上 📚</p>';
 
-    // 「展开」按钮：把剩下的条目补进来
+    // 「展开」按钮
     container.querySelectorAll(".shelf-group-more").forEach(function (btn) {
       btn.addEventListener("click", function () {
         const gk = btn.getAttribute("data-group");
         const sub = list.filter(function (it) { return it.status === gk; });
         const grid = container.querySelector('.shelf-grid[data-group="' + gk + '"]');
         if (grid) {
-          grid.innerHTML = sub.map(function (it) { return shelfCardHTML(it, defaultEmoji); }).join("");
+          grid.innerHTML = sub.map(function (it) { return shelfCardHTML(it, defaultEmoji, labels); }).join("");
         }
         btn.remove();
       });
     });
-  }
 
-  // 平台筛选条
-  if (filterEl) {
-    const counts = {};
-    items.forEach(function (it) {
-      const p = it.platform || "其他";
-      counts[p] = (counts[p] || 0) + 1;
-    });
-    const order = ["Steam", "PS5", "PS4", "Switch", "其他"];
-    const keys = Object.keys(counts).sort(function (a, b) {
-      const ia = order.indexOf(a), ib = order.indexOf(b);
-      return (ia < 0 ? 99 : ia) - (ib < 0 ? 99 : ib);
-    });
-    filterEl.innerHTML =
-      '<button class="platform-pill is-on" data-p="">全部<span class="pill-count">' +
-        items.length + "</span></button>" +
-      keys.map(function (p) {
-        return '<button class="platform-pill" data-p="' + p + '">' + p +
-          '<span class="pill-count">' + counts[p] + "</span></button>";
-      }).join("");
-    filterEl.querySelectorAll(".platform-pill").forEach(function (btn) {
+    // 分页按钮
+    container.querySelectorAll(".pager-btn").forEach(function (btn) {
       btn.addEventListener("click", function () {
-        filterEl.querySelectorAll(".platform-pill").forEach(function (b) {
-          b.classList.remove("is-on");
-        });
-        btn.classList.add("is-on");
-        activePlatform = btn.getAttribute("data-p");
+        const dir = btn.getAttribute("data-pg");
+        if (dir === "prev" && page > 1) page--;
+        if (dir === "next" && page < totalPages) page++;
         paint();
+        container.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    });
+
+    // 点击卡片 → 弹详情
+    container.querySelectorAll(".shelf-card").forEach(function (card) {
+      function open() {
+        const idx = Number(card.getAttribute("data-idx"));
+        openShelfDetail(all[idx], defaultEmoji, labels);
+      }
+      card.addEventListener("click", open);
+      card.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") { e.preventDefault(); open(); }
       });
     });
   }
 
+  paintFilters();
   paint();
 }
 
@@ -429,14 +591,29 @@ document.addEventListener("DOMContentLoaded", function () {
   // ---- 阅读墙页（数据在 js/library.js 的 READING 数组） ----
   const shelfBox = document.getElementById("reading-shelf");
   if (shelfBox) {
-    renderShelf(shelfBox, READING, "📚", SHELF_LABELS.reading);
+    renderShelf(shelfBox, READING, "📚", SHELF_LABELS.reading, {
+      filterEl: document.getElementById("reading-filter"),
+      // 按「类型」（书 / 漫画）和「状态」（在读 / 已读完 / 想读）筛选
+      filters: [
+        { key: "type", label: "类型", pick: function (it) { return it.type; } },
+        { key: "status", label: "状态", pick: function (it) { return statusLabel(it.status, SHELF_LABELS.reading); } },
+      ],
+      pageSize: 24,
+    });
     document.title = "阅读墙 · 小筑";
   }
 
   // ---- 影视墙页（数据在 js/library.js 的 MOVIES 数组） ----
   const filmBox = document.getElementById("film-shelf");
   if (filmBox) {
-    renderShelf(filmBox, MOVIES, "🎬", SHELF_LABELS.film);
+    renderShelf(filmBox, MOVIES, "🎬", SHELF_LABELS.film, {
+      filterEl: document.getElementById("film-filter"),
+      filters: [
+        { key: "type", label: "类型", pick: function (it) { return it.type; } },
+        { key: "status", label: "状态", pick: function (it) { return statusLabel(it.status, SHELF_LABELS.film); } },
+      ],
+      pageSize: 24,
+    });
     document.title = "影视墙 · 小筑";
   }
 
@@ -445,6 +622,13 @@ document.addEventListener("DOMContentLoaded", function () {
   if (gameBox) {
     renderShelf(gameBox, GAMES, "🎮", SHELF_LABELS.game, {
       filterEl: document.getElementById("platform-filter"),
+      // 三个维度：平台 / 游戏类型 / 状态（在玩 / 已通关 / 想玩）
+      filters: [
+        { key: "platform", label: "平台", pick: function (it) { return it.platform; } },
+        { key: "type", label: "类型", pick: function (it) { return it.genre; } },
+        { key: "status", label: "状态", pick: function (it) { return statusLabel(it.status, SHELF_LABELS.game); } },
+      ],
+      pageSize: 24,
       collapseWish: true,
       collapseAt: 8,
     });

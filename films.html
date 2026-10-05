@@ -55,8 +55,10 @@
         <h2>影视墙</h2>
       </div>
       <p style="color:var(--ink-soft);font-size:15px;margin-bottom:8px">
-        电影与剧集的海报墙。在看的标着追到第几集，看过的给评分和一句话影评。
+        电影与剧集的海报墙。在看的标着追到第几集，看过的给评分和一句话影评。<strong>点任意卡片看详情。</strong>
       </p>
+      <!-- 筛选条（由 js/main.js 按数据自动生成：类型 / 状态） -->
+      <nav class="platform-filter" id="film-filter" aria-label="按类型和状态筛选"></nav>
       <!-- 数据在 js/library.js 的 MOVIES 数组中维护：
            剧集进度用文字表示（如 S2E05），海报封面拿到后填入 cover 字段 -->
       <div id="film-shelf"></div>
