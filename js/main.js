@@ -558,8 +558,51 @@ function renderMusicList(container) {
   });
 }
 
+/* ---------- 数据加载：从 data/*.json 读取（后台可编辑） ----------
+   ★ 数据真身在 data/ 下的 JSON（由 Decap 后台管理）
+   ★ 若 fetch 失败（如用 file:// 直接打开），回退到 js/library.js 里的内联数据
+   ------------------------------------------------------------------ */
+function loadLibraryData() {
+  const need = document.getElementById("reading-shelf") ||
+               document.getElementById("film-shelf") ||
+               document.getElementById("game-shelf");
+  // 页面不需要书架数据时，直接跳过网络请求
+  if (!need) return Promise.resolve();
+
+  const stamp = Date.now();   // 绕过 CDN 缓存，保证后台改完能立刻看到
+  const grab = (f) =>
+    fetch("data/" + f + "?v=" + stamp)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((j) => (j && Array.isArray(j.items) ? j.items : null))
+      .catch(() => null);
+
+  return Promise.all([grab("reading.json"), grab("films.json"), grab("games.json")]).then(
+    function (res) {
+      const [reading, films, games] = res;
+      // ★ 原地替换数组内容（READING/MOVIES/GAMES 是 library.js 里的 const，
+      //   不能靠 window.XXX 重新赋值 —— 那样 renderAll 里的标识符仍指向旧数组）
+      fill(READING, reading);
+      fill(MOVIES, films);
+      fill(GAMES, games);
+    }
+  );
+
+  // 用新数据原地覆盖旧数组；没拿到数据就保留原样（兜底）
+  function fill(target, fresh) {
+    if (!fresh || !Array.isArray(target)) return;
+    target.length = 0;
+    fresh.forEach(function (it) { target.push(it); });
+    // 数据源来自 JSON，标记一下方便排查
+    window.__dataFrom = "json";
+  }
+}
+
 /* ---------- 各页面渲染入口 ---------- */
 document.addEventListener("DOMContentLoaded", function () {
+  // 先加载后台可编辑的数据，再执行渲染（无书架页时立即执行）
+  loadLibraryData().then(renderAll);
+
+  function renderAll() {
   // 明暗模式开关
   initThemeToggle();
 
@@ -707,6 +750,7 @@ document.addEventListener("DOMContentLoaded", function () {
         '<div class="video-info"><h3>' + v.title + '</h3><div class="video-meta">' + v.meta + "</div></div></article>";
     }).join("");
   }
+  }   // ← renderAll 结束
 });
 
 /* ---------- 照片 / 相册 / 灯箱 ---------- */

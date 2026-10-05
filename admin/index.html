@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <title>小筑 · 内容管理</title>
+    <link rel="icon" href="data:," />
+    <style>
+      body { margin: 0; font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; }
+      #nc-root { min-height: 100vh; }
+      .boot { display: flex; align-items: center; justify-content: center; min-height: 100vh; color: #888; font-size: 14px; }
+    </style>
+  </head>
+  <body>
+    <!-- Decap CMS 的挂载点：必须有，否则后台白屏 -->
+    <div id="nc-root"></div>
+
+    <div class="boot" id="boot-tip">正在加载管理后台…</div>
+    <script>
+      (function () {
+        var tip = document.getElementById("boot-tip");
+        var root = document.getElementById("nc-root");
+        if (!tip || !root) return;
+
+        // ① Decap 一旦渲染出内容，立刻隐藏启动提示
+        var mo = new MutationObserver(function () {
+          if (root.children.length > 0) {
+            tip.style.display = "none";
+            mo.disconnect();
+          }
+        });
+        mo.observe(root, { childList: true, subtree: true });
+
+        // ② 4 秒后仍未渲染 → 给出可操作的排查指引
+        setTimeout(function () {
+          if (root.children.length === 0) {
+            tip.innerHTML =
+              "后台尚未渲染…<br>" +
+              '<span style="font-size:12px;color:#aaa;line-height:1.8">' +
+              "① 线上访问：需先在 Cloudflare 配好 GitHub OAuth 回调（<code>/api/auth</code>）<br>" +
+              "② 本地访问：Decap 需能加载 jsDelivr CDN，且 OAuth 未通时只会停在登录环节" +
+              "</span>";
+          }
+        }, 4000);
+      })();
+    </script>
+    <!-- Decap CMS：本地自托管（不依赖外网 CDN，境内可稳定加载）
+         备用源：fastly.jsdelivr.net（若本地文件缺失时自动回退） -->
+    <script
+      src="vendor/decap-cms.js"
+      onerror="
+        (function () {
+          var s = document.createElement('script');
+          s.src = 'https://fastly.jsdelivr.net/npm/decap-cms@3.0.0/dist/decap-cms.js';
+          s.onerror = function () {
+            var t = document.getElementById('boot-tip');
+            if (t) t.innerHTML = '后台脚本加载失败：请检查 admin/vendor/decap-cms.js 是否存在，或网络是否可达 fastly.jsdelivr.net';
+          };
+          document.body.appendChild(s);
+        })();
+      "
+    ></script>
+  </body>
+</html>

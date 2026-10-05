@@ -1,0 +1,173 @@
+# ============================================================
+#  小筑 · 内容管理后台配置（Decap CMS）
+# ------------------------------------------------------------
+#  ★ 后台地址：https://blog.heiyunas.top/admin
+#  ★ 数据真身：data/games.json / reading.json / films.json
+#  ★ 在这里改内容 → 自动提交到 GitHub → Cloudflare 自动重新构建
+# ============================================================
+
+backend:
+  name: github
+  repo: HYxueyu/myblog
+  branch: main
+  # 登录后跳转与回调由 Cloudflare Pages 的 /api/auth 处理
+  base_url: https://blog.heiyunas.top
+  auth_endpoint: api/auth
+
+# 媒体文件（封面图）存放位置
+media_folder: "posters"
+public_folder: "/posters"
+
+# 界面语言
+locale: zh_Hans
+
+# 关闭"编辑工作流"（保存即提交，不搞草稿审核那套，简单直接）
+publish_mode: simple
+
+# 关闭每条内容的预览面板（我们的卡片样式复杂，预览意义不大）
+editor:
+  preview: false
+
+collections:
+  # ======================== 游戏墙 ========================
+  - name: "games"
+    label: "游戏墙"
+    label_singular: "游戏"
+    description: "游戏墙数据（对应 data/games.json）"
+    files:
+      - name: "games_data"
+        label: "游戏列表"
+        file: "data/games.json"
+        format: json
+        fields:
+          - label: "数据类型标识（勿改）"
+            name: "kind"
+            widget: "hidden"
+            default: "game"
+          - label: "游戏条目"
+            name: "items"
+            label_singular: "游戏"
+            widget: "list"
+            summary: "{{fields.title}} · {{fields.platform}} · {{fields.status}}"
+            fields:
+              - { label: "标题", name: "title", widget: "string" }
+              - { label: "类型", name: "type", widget: "hidden", default: "游戏" }
+              - label: "分类"
+                name: "genre"
+                widget: "select"
+                options:
+                  - "角色扮演"
+                  - "动作冒险"
+                  - "射击"
+                  - "策略经营"
+                  - "工具"
+                  - "独立游戏"
+                  - "恐怖"
+                  - "体育竞技"
+                required: false
+              - label: "平台"
+                name: "platform"
+                widget: "select"
+                options: ["Steam", "PS5", "PS4", "Switch", "Xbox", "Epic", "手游", "PS4 / PS5", "其他"]
+                required: false
+              - label: "状态"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "在玩", value: "playing" }
+                  - { label: "已通关", value: "done" }
+                  - { label: "想玩", value: "wish" }
+                default: "playing"
+              - { label: "进度 / 时长", name: "progress", widget: "string", required: false, hint: "如「18.3 小时 · 最近 2026-04」或「刚玩了几个任务」" }
+              - { label: "评分（0-5，支持 0.5）", name: "rating", widget: "number", value_type: "float", min: 0, max: 5, default: 0, required: false }
+              - { label: "开发商 / 工作室", name: "author", widget: "string", required: false }
+              - { label: "短评", name: "comment", widget: "text", required: false, hint: "一句话感想，会显示在详情弹窗里" }
+              - { label: "长篇观后感", name: "review", widget: "markdown", required: false, hint: "留空则详情弹窗里不出现「阅读全文」按钮" }
+              - { label: "封面图", name: "cover", widget: "image", required: false, hint: "竖版海报最佳；上传后自动存到 posters/ 目录" }
+              - { label: "占位图标", name: "emoji", widget: "string", default: "🎮", required: false }
+
+  # ======================== 阅读墙 ========================
+  - name: "reading"
+    label: "阅读墙"
+    label_singular: "书 / 漫画"
+    description: "阅读墙数据（对应 data/reading.json）"
+    files:
+      - name: "reading_data"
+        label: "书目列表"
+        file: "data/reading.json"
+        format: json
+        fields:
+          - label: "数据类型标识（勿改）"
+            name: "kind"
+            widget: "hidden"
+            default: "reading"
+          - label: "书目条目"
+            name: "items"
+            label_singular: "书 / 漫画"
+            widget: "list"
+            summary: "{{fields.title}} · {{fields.type}} · {{fields.status}}"
+            fields:
+              - { label: "标题", name: "title", widget: "string" }
+              - label: "类型"
+                name: "type"
+                widget: "select"
+                options: ["书", "漫画"]
+                default: "书"
+              - { label: "作者", name: "author", widget: "string", required: false }
+              - label: "状态"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "在读", value: "reading" }
+                  - { label: "已读完", value: "done" }
+                  - { label: "想读", value: "wish" }
+                default: "reading"
+              - { label: "进度（百分比数字，如 42）", name: "progress", widget: "number", value_type: "int", min: 0, max: 100, default: 0, required: false }
+              - { label: "评分（0-5，支持 0.5）", name: "rating", widget: "number", value_type: "float", min: 0, max: 5, default: 0, required: false }
+              - { label: "短评", name: "comment", widget: "text", required: false }
+              - { label: "长篇书评", name: "review", widget: "markdown", required: false }
+              - { label: "封面图", name: "cover", widget: "image", required: false }
+              - { label: "占位图标", name: "emoji", widget: "string", default: "📚", required: false }
+
+  # ======================== 影视墙 ========================
+  - name: "films"
+    label: "影视墙"
+    label_singular: "电影 / 剧集"
+    description: "影视墙数据（对应 data/films.json）"
+    files:
+      - name: "films_data"
+        label: "影视列表"
+        file: "data/films.json"
+        format: json
+        fields:
+          - label: "数据类型标识（勿改）"
+            name: "kind"
+            widget: "hidden"
+            default: "film"
+          - label: "影视条目"
+            name: "items"
+            label_singular: "电影 / 剧集"
+            widget: "list"
+            summary: "{{fields.title}} · {{fields.type}} · {{fields.status}}"
+            fields:
+              - { label: "标题", name: "title", widget: "string" }
+              - label: "类型"
+                name: "type"
+                widget: "select"
+                options: ["电影", "剧集"]
+                default: "电影"
+              - { label: "导演", name: "author", widget: "string", required: false }
+              - label: "状态"
+                name: "status"
+                widget: "select"
+                options:
+                  - { label: "在看", value: "watching" }
+                  - { label: "已看完", value: "done" }
+                  - { label: "想看", value: "wish" }
+                default: "wish"
+              - { label: "进度", name: "progress", widget: "string", required: false, hint: "如「S2E05」「看到 45 分钟」" }
+              - { label: "评分（0-5，支持 0.5）", name: "rating", widget: "number", value_type: "float", min: 0, max: 5, default: 0, required: false }
+              - { label: "短评", name: "comment", widget: "text", required: false }
+              - { label: "长篇观后感", name: "review", widget: "markdown", required: false }
+              - { label: "封面图", name: "cover", widget: "image", required: false }
+              - { label: "占位图标", name: "emoji", widget: "string", default: "🎬", required: false }

@@ -1,15 +1,29 @@
 /* ============================================================
-   小筑 · 数据文件（自动生成，请勿手改！）
+   小筑 · 阅读墙 & 影视墙 数据文件
    ------------------------------------------------------------
-   ★ 数据真身在 _data/games.json / reading.json / films.json
-   ★ 由 tools/build-library.js 汇总生成本文件
-   ★ 想改内容：用后台（/admin）或直接编辑 _data/*.json
-   ★ 手工改本文件会在下次构建时被覆盖
-   ------------------------------------------------------------
-   生成时间：2026/10/5 10:48:35
+   ★ 如何添加/更新条目：修改下面的 READING（书/漫画）或
+     MOVIES（电影/剧集）数组，或直接告诉墨鸦"《XX》读到xx%"
+   ★ 字段说明（READING / MOVIES 通用）：
+       title    标题（书名 / 片名）
+       type     类型：READING 用「书 / 漫画」；MOVIES 用「电影 / 剧集」
+       author   作者 / 导演（可省略）
+       status   状态：
+                  "reading" → 在读 / 在看
+                  "done"    → 已读完 / 已看完
+                  "wish"    → 想读 / 想看
+       progress 进度：
+                  READING 用数字表示百分比，如 42 表示读到 42%；
+                  MOVIES 用文字表示，如 "S2E05" 或 " 看到 45 分钟"
+                  （仅 status 为 reading 时显示进度条）
+       rating   评分：0-5，支持 0.5（如 4.5），未评分填 0
+       comment  一句话观后感 / 短评（可省略）
+       cover    海报图片地址（相对路径，如 "posters/dune2.jpg"）。
+                留空则显示渐变占位封面，之后拿到海报随时替换
+       emoji    占位封面上的图标
    ============================================================ */
 
 const READING = [
+  /* ---------- 书：正在读（微信读书书架） ---------- */
   {
     title: "谁杀了她",
     type: "书",
@@ -17,6 +31,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/db-30210250.jpg",
     emoji: "🔪",
   },
@@ -27,6 +42,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/db-6746289.jpg",
     emoji: "🕵️",
   },
@@ -37,6 +53,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/db-36049200.jpg",
     emoji: "🪑",
   },
@@ -47,6 +64,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/db-26862626.jpg",
     emoji: "🐙",
   },
@@ -57,6 +75,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/db-36858240.jpg",
     emoji: "🖼️",
   },
@@ -67,6 +86,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/db-26786416.jpg",
     emoji: "🚪",
   },
@@ -77,9 +97,11 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/db-3211779.jpg",
     emoji: "🧮",
   },
+  /* ---------- 书：已读完 ---------- */
   {
     title: "恶意",
     type: "书",
@@ -87,6 +109,7 @@ const READING = [
     status: "done",
     progress: 100,
     rating: 0,
+    comment: "",
     cover: "posters/db-26877752.jpg",
     emoji: "😈",
   },
@@ -97,9 +120,12 @@ const READING = [
     status: "done",
     progress: 100,
     rating: 0,
+    comment: "",
     cover: "posters/db-30245830.jpg",
     emoji: "🏚️",
   },
+
+  /* ---------- 漫画：在读 ---------- */
   {
     title: "坂本日常",
     type: "漫画",
@@ -107,6 +133,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-496617.jpg",
     emoji: "🥷",
   },
@@ -117,6 +144,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-268279.jpg",
     emoji: "🪚",
   },
@@ -127,6 +155,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-112978.jpg",
     emoji: "🧠",
   },
@@ -137,6 +166,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-18462.jpg",
     emoji: "🏀",
   },
@@ -147,6 +177,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-17200.jpg",
     emoji: "🔍",
   },
@@ -157,6 +188,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-48108.jpg",
     emoji: "🔍",
   },
@@ -167,6 +199,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-506306.jpg",
     emoji: "🔍",
   },
@@ -177,6 +210,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-96861.jpg",
     emoji: "🔍",
   },
@@ -187,6 +221,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-365622.jpg",
     emoji: "🔍",
   },
@@ -197,6 +232,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-395378.jpg",
     emoji: "🍖",
   },
@@ -207,6 +243,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-39199.jpg",
     emoji: "🌑",
   },
@@ -217,6 +254,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-35906.jpg",
     emoji: "🖤",
   },
@@ -227,6 +265,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-316522.jpg",
     emoji: "🌀",
   },
@@ -237,6 +276,7 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-4317.jpg",
     emoji: "👁️",
   },
@@ -247,13 +287,25 @@ const READING = [
     status: "reading",
     progress: 0,
     rating: 0,
+    comment: "",
     cover: "posters/bgm-400602.jpg",
     emoji: "🧝",
-  }
+  },
 ];
 
-const MOVIES = [];
+const MOVIES = [
+  /* 影视记录暂空（黑羽 2026-10-05 确认旧 5 条都没看过，已清空）
+     —— 之后用「片名 + 看到哪 + 评分」即可补录，墨鸦会自动抓海报 */
+];
 
+/* ============================================================
+   游戏墙数据
+   ★ 数据来源：Exophase 自动刮削（tools/scrape-exophase.js）
+   ★ status：「playing」在玩 / 「done」已通关 / 「wish」想玩
+   ★ progress：数字=完成度百分比（显示进度条）；文字=时长/关卡
+   ★ platform：Steam / PS5 / PS4 / Switch（显示在卡片上）
+   ★ 手写短评优先，刮削只补时长和封面
+   ============================================================ */
 const GAMES = [
   {
     title: "God of War",
@@ -281,6 +333,7 @@ const GAMES = [
     title: "黑神话：悟空",
     type: "游戏",
     genre: "角色扮演",
+    author: "游戏科学",
     platform: "PS5",
     status: "playing",
     progress: "40 小时 · 最近 2026-06",
@@ -288,31 +341,30 @@ const GAMES = [
     comment: "第三章的黄风岭配乐封神。手残党在虎先锋面前卡了两晚上。",
     cover: "posters/steam-2358720.jpg",
     emoji: "🐒",
-    author: "游戏科学",
   },
   {
     title: "Slay the Spire",
     type: "游戏",
     genre: "策略经营",
+    author: "Mega Crit Games",
     platform: "Steam",
     status: "playing",
     progress: "7.8 小时 · 最近 2026-06",
     rating: 0,
     cover: "posters/steam-646570.jpg",
     emoji: "🎮",
-    author: "Mega Crit Games",
   },
   {
     title: "Wallpaper Engine",
     type: "游戏",
     genre: "工具",
+    author: "Kristjan Skutta",
     platform: "Steam",
     status: "playing",
     progress: "80 小时 · 最近 2026-06",
     rating: 0,
     cover: "posters/steam-431960.jpg",
     emoji: "🎮",
-    author: "Kristjan Skutta",
   },
   {
     title: "Lossless Scaling",
@@ -362,25 +414,25 @@ const GAMES = [
     title: "Darkest Dungeon",
     type: "游戏",
     genre: "角色扮演",
+    author: "Red Hook Studios",
     platform: "Steam",
     status: "playing",
     progress: "3.9 小时 · 最近 2026-04",
     rating: 0,
     cover: "posters/steam-262060.jpg",
     emoji: "🎮",
-    author: "Red Hook Studios",
   },
   {
     title: "Ready or Not",
     type: "游戏",
     genre: "射击",
+    author: "VOID Interactive",
     platform: "Steam",
     status: "playing",
     progress: "5.9 小时 · 最近 2026-04",
     rating: 0,
     cover: "posters/steam-1144200.jpg",
     emoji: "🎮",
-    author: "VOID Interactive",
   },
   {
     title: "It Takes Two",
@@ -397,13 +449,13 @@ const GAMES = [
     title: "Resident Evil 2",
     type: "游戏",
     genre: "恐怖",
+    author: "CAPCOM Co. Ltd.",
     platform: "Steam",
     status: "playing",
     progress: "21.3 小时 · 最近 2026-03",
     rating: 0,
     cover: "posters/steam-883710.jpg",
     emoji: "🎮",
-    author: "CAPCOM Co. Ltd.",
   },
   {
     title: "Cyberpunk 2077",
@@ -431,37 +483,37 @@ const GAMES = [
     title: "Red Dead Redemption 2",
     type: "游戏",
     genre: "动作冒险",
+    author: "Rockstar Games",
     platform: "Steam",
     status: "playing",
     progress: "3.4 小时 · 最近 2025-12",
     rating: 0,
     cover: "posters/steam-1174180.jpg",
     emoji: "🎮",
-    author: "Rockstar Games",
   },
   {
     title: "Detroit: Become Human",
     type: "游戏",
     genre: "动作冒险",
+    author: "Quantic Dream (original release)",
     platform: "Steam",
     status: "playing",
     progress: "16 小时 · 最近 2025-11",
     rating: 0,
     cover: "posters/steam-1222140.jpg",
     emoji: "🎮",
-    author: "Quantic Dream (original release)",
   },
   {
     title: "eFootball",
     type: "游戏",
     genre: "体育竞技",
+    author: "Konami",
     platform: "PS5",
     status: "playing",
     progress: "1.5 小时 · 最近 2025-11",
     rating: 0,
     cover: "posters/bgm-game-625842.jpg",
     emoji: "🎮",
-    author: "Konami",
   },
   {
     title: "Where Winds Meet",
@@ -478,61 +530,61 @@ const GAMES = [
     title: "Bongo Cat",
     type: "游戏",
     genre: "独立游戏",
+    author: "Marcel Zurawka",
     platform: "Steam",
     status: "playing",
     progress: "30.9 小时 · 最近 2025-10",
     rating: 0,
     cover: "posters/steam-3419430.jpg",
     emoji: "🎮",
-    author: "Marcel Zurawka",
   },
   {
     title: "Yakuza 0",
     type: "游戏",
     genre: "动作冒险",
+    author: "Sega Studios Australia",
     platform: "Steam",
     status: "playing",
     progress: "3.7 小时 · 最近 2025-10",
     rating: 0,
     cover: "posters/steam-638970.jpg",
     emoji: "🎮",
-    author: "Sega Studios Australia",
   },
   {
     title: "Persona 5 Royal",
     type: "游戏",
     genre: "角色扮演",
+    author: "Atlus",
     platform: "Steam",
     status: "playing",
     progress: "34.8 小时 · 最近 2025-09",
     rating: 0,
     cover: "posters/steam-1687950.jpg",
     emoji: "🎮",
-    author: "Atlus",
   },
   {
     title: "Sultan's Game",
     type: "游戏",
     genre: "策略经营",
+    author: "Double Cross",
     platform: "Steam",
     status: "playing",
     progress: "7.9 小时 · 最近 2025-09",
     rating: 0,
     cover: "posters/steam-3117820.jpg",
     emoji: "🎮",
-    author: "Double Cross",
   },
   {
     title: "Diablo IV",
     type: "游戏",
     genre: "角色扮演",
+    author: "Blizzard Entertainment",
     platform: "Steam",
     status: "playing",
     progress: "14.8 小时 · 最近 2025-07",
     rating: 0,
     cover: "posters/steam-2344520.jpg",
     emoji: "🎮",
-    author: "Blizzard Entertainment",
   },
   {
     title: "FINAL FANTASY XVI",
@@ -560,25 +612,25 @@ const GAMES = [
     title: "Borderlands 3",
     type: "游戏",
     genre: "射击",
+    author: "Gearbox Software LLC",
     platform: "PS5",
     status: "playing",
     progress: "1.9 小时 · 最近 2025-06",
     rating: 0,
     cover: "posters/steam-397540.jpg",
     emoji: "🎮",
-    author: "Gearbox Software LLC",
   },
   {
     title: "DAVE THE DIVER",
     type: "游戏",
     genre: "策略经营",
+    author: "MINTROCKET",
     platform: "Steam",
     status: "playing",
     progress: "5.3 小时 · 最近 2025-06",
     rating: 0,
     cover: "posters/steam-1868140.jpg",
     emoji: "🎮",
-    author: "MINTROCKET",
   },
   {
     title: "Metro Exodus",
@@ -595,13 +647,13 @@ const GAMES = [
     title: "Monster Hunter: World",
     type: "游戏",
     genre: "动作冒险",
+    author: "CAPCOM Co. Ltd.",
     platform: "Steam",
     status: "playing",
     progress: "51.2 小时 · 最近 2025-05",
     rating: 0,
     cover: "posters/steam-582010.jpg",
     emoji: "🎮",
-    author: "CAPCOM Co. Ltd.",
   },
   {
     title: "The Last of Us Remastered",
@@ -618,6 +670,7 @@ const GAMES = [
     title: "塞尔达传说：王国之泪",
     type: "游戏",
     genre: "动作冒险",
+    author: "任天堂",
     platform: "Switch",
     status: "playing",
     progress: "刚玩了几个任务",
@@ -626,12 +679,12 @@ const GAMES = [
     cover: "img/cover-zelda_w.jpg",
     emoji: "🗺️",
     review: "zelda-shrine-guide",
-    author: "任天堂",
   },
   {
     title: "博德之门 3",
     type: "游戏",
     genre: "角色扮演",
+    author: "Larian Studios",
     platform: "Steam",
     status: "done",
     progress: "166.4 小时 · 最近 2026-08",
@@ -639,12 +692,12 @@ const GAMES = [
     comment: "年度游戏没有悬念。队友全员立体的 CRPG 天花板，二周目排队中。",
     cover: "posters/steam-1086940.jpg",
     emoji: "🎲",
-    author: "Larian Studios",
   },
   {
     title: "星露谷物语",
     type: "游戏",
     genre: "策略经营",
+    author: "ConcernedApe",
     platform: "Steam",
     status: "done",
     progress: "30.3 小时 · 最近 2025-10",
@@ -652,19 +705,18 @@ const GAMES = [
     comment: "电子布洛芬。压力大的时候回去种两天地，什么都好了。",
     cover: "posters/steam-413150.jpg",
     emoji: "🌾",
-    author: "ConcernedApe",
   },
   {
     title: "DYNASTY WARRIORS: ORIGINS",
     type: "游戏",
     genre: "动作冒险",
+    author: "KOEI TECMO GAMES CO.",
     platform: "Steam",
     status: "wish",
     progress: "0.6 小时 · 最近 2026-06",
     rating: 0,
     cover: "posters/steam-2384580.jpg",
     emoji: "🎮",
-    author: "KOEI TECMO GAMES CO.",
   },
   {
     title: "Arknights: Endfield",
@@ -681,13 +733,13 @@ const GAMES = [
     title: "DSX",
     type: "游戏",
     genre: "工具",
+    author: "Paliverse",
     platform: "Steam",
     status: "wish",
     progress: "0.8 小时 · 最近 2026-04",
     rating: 0,
     cover: "posters/steam-1812620.jpg",
     emoji: "🎮",
-    author: "Paliverse",
   },
   {
     title: "Live2DViewerEX",
@@ -704,13 +756,13 @@ const GAMES = [
     title: "Horizon Zero Dawn Remastered",
     type: "游戏",
     genre: "动作冒险",
+    author: "guerrilla games",
     platform: "Steam",
     status: "wish",
     progress: "0.8 小时 · 最近 2025-10",
     rating: 0,
     cover: "posters/steam-2561580.jpg",
     emoji: "🎮",
-    author: "guerrilla games",
   },
   {
     title: "Spacewar",
@@ -771,13 +823,13 @@ const GAMES = [
     title: "Grand Theft Auto V Enhanced",
     type: "游戏",
     genre: "动作冒险",
+    author: "rockstar north",
     platform: "Steam",
     status: "wish",
     progress: "0.4 小时 · 最近 2025-05",
     rating: 0,
     cover: "posters/steam-3240220.jpg",
     emoji: "🎮",
-    author: "rockstar north",
   },
   {
     title: "The Last of Us Part I",
@@ -794,12 +846,21 @@ const GAMES = [
     title: "艾尔登法环：黄金树幽影",
     type: "游戏",
     genre: "角色扮演",
+    author: "FromSoftware",
     platform: "PS5",
     status: "wish",
     rating: 0,
     comment: "本体还没打通，DLC 先囤着。",
     cover: "posters/bgm-game-284100.jpg",
     emoji: "🗡️",
-    author: "FromSoftware",
-  }
+  },
 ];
+
+/* ============================================================
+   「全文观后感」链接约定
+   ------------------------------------------------------------
+   READING / MOVIES / GAMES 任意条目加一个字段：
+       review: "对应博文 POSTS 数组里的 id"
+   卡片上就会自动出现「→ 全文观后感」链接，跳到 post.html。
+   长篇感想写好发给我，我负责：① 登记为博客文章 ② 墙上挂链接。
+   ============================================================ */

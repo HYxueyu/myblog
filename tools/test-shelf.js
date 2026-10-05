@@ -148,8 +148,22 @@ const location = { search: "" };
 const Audio = function () { return { play() { }, pause() { }, addEventListener() { } }; };
 Audio.prototype.addEventListener = function () { };
 
+// fetch 桩：从本地 data/*.json 读（与线上行为一致，验证 JSON → 渲染 链路）
+const fetch = function (url) {
+  const name = String(url).split("/").pop().split("?")[0];
+  const p = path.join(ROOT, "data", name);
+  return new Promise((resolve) => {
+    try {
+      const body = fs.readFileSync(p, "utf8");
+      resolve({ ok: true, json: () => Promise.resolve(JSON.parse(body)) });
+    } catch (e) {
+      resolve({ ok: false, json: () => Promise.resolve(null) });
+    }
+  });
+};
+
 const ctx = {
-  document, localStorage, window, location,
+  document, localStorage, window, location, fetch,
   URLSearchParams, Audio,
   console, setTimeout, clearTimeout, Date, Math, JSON, Object, Array, String, Number, Boolean, RegExp,
 };
@@ -162,8 +176,10 @@ vm.runInContext(read("js/main.js"), ctx);
 // 把数组挂到全局，方便断言里按数据动态算（const 声明不会自动挂到 ctx）
 vm.runInContext("this.GAMES = GAMES; this.READING = READING; this.MOVIES = MOVIES;", ctx);
 
-// 触发 DOMContentLoaded
-(document._domReady || []).forEach((fn) => fn());
+// 触发 DOMContentLoaded。新 main.js 会先 fetch data/*.json 再渲染，
+// 故需等待微任务队列清空后再断言。
+let ready = false;
+Promise.resolve().then(() => Promise.resolve()).then(() => Promise.resolve()).then(() => { ready = true; });
 
 /* ---------- 断言 ---------- */
 let pass = 0, fail = 0;
@@ -172,6 +188,29 @@ function ok(name, cond, extra) {
   else { console.log("  ✗ " + name + (extra ? "   → " + extra : "")); fail++; }
 }
 
+// 等待 fetch 链路完成后再断言
+function waitReady() {
+  return new Promise((resolve) => {
+    const t = setTimeout(resolve, 3000);   // 兜底，防微任务没清完卡死
+    Promise.resolve()
+      .then(() => Promise.resolve())
+      .then(() => Promise.resolve())
+      .then(() => Promise.resolve())
+      .then(() => { clearTimeout(t); resolve(); });
+  });
+}
+
+waitReady().then(function () {
+  // 触发 DOMContentLoaded（renderAll 已在此步完成）
+  (document._domReady || []).forEach((fn) => fn());
+  return waitReady();
+}).then(function () {
+  runAssertions();
+  console.log("\n=== 结果 === " + pass + " 通过 / " + fail + " 失败");
+  process.exit(fail ? 1 : 0);
+});
+
+function runAssertions() {
 console.log("\n=== 筛选条 ===");
 const fhtml = filterBox.innerHTML;
 ok("有 3 个筛选维度（平台/类型/状态）", (fhtml.match(/filter-row-label/g) || []).length === 3,
@@ -214,5 +253,12 @@ if (wantPlay) {
   ok("找到「想玩」筛选按钮", false);
 }
 
-console.log("\n=== 结果 === " + pass + " 通过 / " + fail + " 失败");
-process.exit(fail ? 1 : 0);
+console.log("\n=== 数据来源（JSON → 渲染） ===");
+// 数据加载是原地替换 GAMES 数组内容，故检查 ctx.GAMES 本身
+const jsonCount = (ctx.GAMES || []).length;
+ok("GAMES 数组已由 data/games.json 装载", jsonCount > 0, "长度 " + jsonCount);
+const jsonTitle = (ctx.GAMES || [])[0] ? ctx.GAMES[0].title : "(空)";
+ok("首条标题来自 JSON（God of War）", jsonTitle === "God of War", "实际 " + jsonTitle);
+ok("渲染的卡片数与 JSON 条数吻合（首页 24 张 ≤ " + jsonCount + " 条）",
+  (shelfBox._cards || []).length <= jsonCount);
+}

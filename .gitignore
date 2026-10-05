@@ -1,0 +1,22 @@
+# 依赖
+node_modules/
+package-lock.json
+package.json
+
+# Cloudflare / wrangler
+.wrangler/
+.dev.vars
+
+# 验证截图与临时产物
+tools/*.png
+tools/_probe.js
+tools/cover-result.tmp.json
+
+# 系统
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# 编辑器
+.vscode/
+.idea/
